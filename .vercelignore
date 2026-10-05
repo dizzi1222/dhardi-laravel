@@ -13,3 +13,22 @@ npm-debug.log
 yarn-error.log
 .DS_Store
 Thumbs.db
+
+# Vercel builds the image from what it uploads, so anything listed here is also
+# kept out of the Docker build context. The package manifest on a development
+# machine lists require-dev providers (Laravel Boost) whose classes are absent
+# from a --no-dev install, and package:discover fails when it reads that foreign
+# manifest back.
+bootstrap/cache/*.php
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+public/build
+public/hot
+.agent
+.agents
+.claude/skills
+.mcp.json
+opencode.json
+boost.json
