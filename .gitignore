@@ -42,3 +42,4 @@ Thumbs.db
 
 # Superseded by vite.config.ts.
 /vite.config.js
+.vercel

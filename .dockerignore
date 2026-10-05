@@ -1,0 +1,57 @@
+# Build context for Dockerfile.vercel.
+#
+# Without this file `COPY . .` copies the entire working directory into the
+# image, which means two failures at once:
+#
+#  1. `.env` — with real API keys — is baked into a layer and pushed to the
+#     container registry. A `.gitignore` does not stop this: Docker does not
+#     read it.
+#  2. The local `vendor/` directory, built with dev dependencies, overwrites the
+#     `--no-dev` vendor from the composer stage. Package discovery then tries to
+#     register a dev-only service provider that the production install does not
+#     have, and the build fails on a class that is genuinely absent.
+
+# Secrets and local configuration. `.env.example` stays, since it documents the
+# variables without carrying any value.
+.env
+.env.*
+!.env.example
+
+# Installed in their own stages, or not at all in the image.
+vendor
+node_modules
+
+# Build outputs. The assets stage produces these fresh.
+public/build
+public/hot
+
+# Runtime state. Never belongs in an image: it would ship one developer's
+# database and log files to production.
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/framework/testing/*
+storage/logs/*
+database/*.sqlite
+database/*.sqlite-journal
+
+# Caches that would otherwise be read back instead of regenerated.
+bootstrap/cache/*.php
+
+# Version control and agent tooling.
+.git
+.gitignore
+.github
+.agents
+.claude/skills
+.cursor
+.mcp.json
+opencode.json
+boost.json
+AGENTS.md
+CLAUDE.md
+
+# Deployment and documentation that the image does not need.
+.vercel
+.vercelignore
+README.md
