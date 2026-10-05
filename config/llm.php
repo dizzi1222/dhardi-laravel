@@ -70,7 +70,7 @@ return [
     */
 
     'cache' => [
-        'store' => env('LLM_CACHE_STORE', 'database'),
+        'store' => env('LLM_CACHE_STORE', 'file'),
         'ttl_seconds' => (int) env('LLM_CACHE_TTL', 900),
         'enabled' => (bool) env('LLM_CACHE_ENABLED', true),
     ],

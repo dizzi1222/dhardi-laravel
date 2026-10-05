@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Llm\Reliability;
 
 use App\Llm\Exceptions\LlmUnavailableException;
+use App\Support\BestEffort;
 use Illuminate\Contracts\Cache\Repository as CacheRepository;
 
 /**
@@ -35,7 +36,10 @@ final class CircuitBreaker
 
     public function state(): string
     {
-        $failures = (int) $this->cache->get($this->failuresKey(), 0);
+        $failures = (int) (BestEffort::write(
+            'breaker.read',
+            fn (): mixed => $this->cache->get($this->failuresKey(), 0),
+        ) ?? 0);
 
         if ($failures < $this->failureThreshold) {
             return self::CLOSED;
@@ -85,11 +89,13 @@ final class CircuitBreaker
     {
         $failures = (int) $this->cache->get($this->failuresKey(), 0) + 1;
 
-        $this->cache->put($this->failuresKey(), $failures, $this->cooldownSeconds * 4);
+        BestEffort::write('breaker.failure', function () use ($failures): void {
+            $this->cache->put($this->failuresKey(), $failures, $this->cooldownSeconds * 4);
 
-        if ($failures >= $this->failureThreshold) {
-            $this->cache->put($this->openedKey(), time(), $this->cooldownSeconds * 4);
-        }
+            if ($failures >= $this->failureThreshold) {
+                $this->cache->put($this->openedKey(), time(), $this->cooldownSeconds * 4);
+            }
+        });
     }
 
     /**

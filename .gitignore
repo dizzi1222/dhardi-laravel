@@ -43,3 +43,7 @@ Thumbs.db
 # Superseded by vite.config.ts.
 /vite.config.js
 .vercel
+
+# Laravel scaffolds this as a zero-byte file. The SVG icon is the one that is
+# actually served, and an empty .ico produces a 200 with no content.
+/public/favicon.ico

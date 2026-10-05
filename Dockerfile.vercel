@@ -55,8 +55,8 @@ WORKDIR /app
 ENV APP_ENV=production \
     APP_DEBUG=false \
     LOG_CHANNEL=stderr \
-    CACHE_STORE=database \
-    SESSION_DRIVER=database \
+    CACHE_STORE=file \
+    SESSION_DRIVER=file \
     QUEUE_CONNECTION=sync \
     DB_CONNECTION=sqlite \
     DB_DATABASE=/app/database/database.sqlite \
@@ -84,12 +84,17 @@ RUN php artisan package:discover --ansi \
 # A container function has a writable filesystem for the life of the instance,
 # but nothing survives a scale-in. Seeding at build time means the portfolio —
 # the part a visitor actually reads — is present on every cold start instead of
-# depending on a database that may not be configured yet. The writable copies
-# the application makes afterwards (audit rows, transcripts) are best-effort:
-# see App\Support\BestEffort.
+# depending on a database that may not be configured yet.
+#
+# The file is left writable by `www-data`, because the assistant still appends to
+# it for as long as the instance lives. A read-only file turns every one of those
+# writes into an error, and the point of the best-effort writes is that they
+# degrade to a log line rather than taking the request down.
 RUN touch /app/database/database.sqlite \
  && php artisan migrate --force --ansi \
- && php artisan db:seed --force --ansi
+ && php artisan db:seed --force --ansi \
+ && chown www-data:www-data /app/database/database.sqlite \
+ && chmod 664 /app/database/database.sqlite
 
 COPY --chown=www-data:www-data Caddyfile /etc/frankenphp/Caddyfile
 
