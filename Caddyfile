@@ -1,0 +1,38 @@
+# The site address is a bare port with the scheme pinned to http.
+#
+# Each of the three alternatives below was tried against this image and each
+# one fails in a way that looks like a working server. That is what makes them
+# worth writing down:
+#
+#  1. `:80` (no scheme). Caddy reads "80" as a domain name, asks Let's Encrypt
+#     for a certificate, is rejected ("Domain name needs at least one dot"), and
+#     then retries every minute for three days while filling the log with ACME
+#     errors.
+#  2. `:80` with `tls internal`. That silences ACME but leaves auto-HTTPS on, so
+#     Caddy answers every plain-HTTP request with a redirect to HTTPS. Behind a
+#     platform that already terminated TLS and forwards HTTP, that loops.
+#  3. `{$PORT:80}`. Not a valid site address in Caddy 2.11 — the config adapts
+#     without complaint and the server starts, but every route answers
+#     **200 with a zero-length body**. PHP never runs. This is the worst of the
+#     three because it looks healthy.
+#
+# Pinning the scheme disables TLS and the HTTPS redirect together, and a literal
+# port keeps the address parseable. TLS is the platform's job; this container
+# only ever speaks plain HTTP.
+http://:80 {
+	root * /app/public
+
+	encode zstd gzip
+
+	# Content-hashed assets, so they can be cached indefinitely.
+	@assets path /build/*
+	header @assets Cache-Control "public, max-age=31536000, immutable"
+
+	# Deliberately no `try_files`. Inside `php_server` it resolves and serves
+	# before handing off to PHP, which returns an empty 200 for every route and
+	# never reaches Laravel. `php_server` already falls back to index.php.
+	#
+	# The document root is public/, so application source, configuration and
+	# `.env` are unreachable by construction rather than by a deny rule.
+	php_server
+}

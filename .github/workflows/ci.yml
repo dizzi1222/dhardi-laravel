@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# A superseded run tells you nothing once a newer commit exists, and cancelling
+# it saves the minutes a Laravel container build costs.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: PHP (Laravel)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, pdo, pdo_sqlite, intl, dom
+          coverage: none
+          tools: composer:v2
+
+      # Cached on the lockfile hash, so it only reruns when a dependency moves.
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - run: composer install --no-interaction --no-progress
+
+      - name: Environment
+        run: cp .env.example .env
+
+      - name: Application key
+        run: php artisan key:generate
+
+      - run: php artisan migrate --force
+
+      - name: Formatting
+        run: vendor/bin/pint --test
+
+      - name: Tests
+        run: php artisan test
+
+      # Replays the golden dataset and fails the build on a regression, which is
+      # the point of keeping it in CI rather than on a developer terminal.
+      - name: Assistant evals
+        run: php artisan evals:run
+
+  frontend:
+    name: TypeScript and assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci --ignore-scripts
+
+      # No `tsc -b` here on purpose: Vite compiles the bundle, and the typecheck
+      # runs separately so a type error fails for its own reason.
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build
+        run: npm run build

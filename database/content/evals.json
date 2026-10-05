@@ -1,0 +1,86 @@
+[
+  {
+    "key": "de_stack_backend",
+    "locale": "de",
+    "prompt": "Welche Technologien verwendet diese Anwendung im Backend?",
+    "expected_contains": ["Laravel", "PHP"],
+    "is_active": true
+  },
+  {
+    "key": "de_stack_frontend",
+    "locale": "de",
+    "prompt": "Mit welcher Frontend-Technik ist diese Seite gebaut?",
+    "expected_contains": ["React", "TypeScript"],
+    "is_active": true
+  },
+  {
+    "key": "de_reliability",
+    "locale": "de",
+    "prompt": "Wie wird mit Ausfällen der KI-API umgegangen?",
+    "expected_contains": ["fallback"],
+    "is_active": true
+  },
+  {
+    "key": "de_tests",
+    "locale": "de",
+    "prompt": "Gibt es in diesem Projekt Tests?",
+    "expected_contains": ["PHPUnit"],
+    "is_active": true
+  },
+  {
+    "key": "de_tenancy",
+    "locale": "de",
+    "prompt": "Wie werden neue Kunden aufgesetzt?",
+    "expected_contains": ["tenant:provision"],
+    "is_active": true
+  },
+  {
+    "key": "de_work_permit",
+    "locale": "de",
+    "prompt": "Brauche ich für eine Stelle in der Schweiz ein Visum?",
+    "expected_contains": ["Staatsbürger"],
+    "is_active": true
+  },
+  {
+    "key": "de_location",
+    "locale": "de",
+    "prompt": "Wo wohnst du?",
+    "expected_contains": ["Dominikanischen Republik"],
+    "is_active": true
+  },
+  {
+    "key": "de_german_level",
+    "locale": "de",
+    "prompt": "Wie gut ist dein Deutsch?",
+    "expected_contains": ["Muttersprache"],
+    "is_active": true
+  },
+  {
+    "key": "es_location",
+    "locale": "es",
+    "prompt": "¿Dónde vives?",
+    "expected_contains": ["República Dominicana"],
+    "is_active": true
+  },
+  {
+    "key": "es_stack",
+    "locale": "es",
+    "prompt": "¿Con qué tecnologías está construida esta aplicación?",
+    "expected_contains": ["Laravel"],
+    "is_active": true
+  },
+  {
+    "key": "en_location",
+    "locale": "en",
+    "prompt": "Where do you live?",
+    "expected_contains": ["Dominican Republic"],
+    "is_active": true
+  },
+  {
+    "key": "en_german_level",
+    "locale": "en",
+    "prompt": "How good is your German?",
+    "expected_contains": ["mother tongue"],
+    "is_active": true
+  }
+]

@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Técnico en Desarrollo y Administración de Aplicaciones Informáticas",
+    "issuer": "Ministerio de Educación de la República Dominicana · Liceo Técnico Luis Ernesto Gómez Uribe, Jarabacoa",
+    "url": null,
+    "status": "in_progress",
+    "issued_year": 2024,
+    "sort_order": 1,
+    "note": {
+      "de": "Fachhochschulabschluss (technischer Berufsschulabschluss) in Entwicklung und Verwaltung von Informatikanwendungen. Laufend, Abschluss 2026 erwartet.",
+      "es": "Título técnico profesional en Desarrollo y Administración de Aplicaciones Informáticas. En curso, se prevé la finalización en 2026.",
+      "en": "Vocational degree in Development and Administration of Computer Applications. In progress, expected to complete in 2026."
+    }
+  },
+  {
+    "name": "CIC Associate Developer",
+    "issuer": "Cincinnatus Institute of Craftsmanship",
+    "url": "https://cincinnatus.edu.do",
+    "status": "completed",
+    "issued_year": 2025,
+    "sort_order": 2,
+    "note": {
+      "de": "Zertifikatsabschluss auf der Software-Development-Spur, abgeschlossen durch die Mitarbeit an PTD-Talento.",
+      "es": "Finalización de la ruta de Desarrollo de Software, completada con la contribución a PTD-Talento.",
+      "en": "Completion of the software development track, finished through the contribution to PTD-Talento."
+    }
+  },
+  {
+    "name": "Desarrollo de Software v4",
+    "issuer": "Cincinnatus Institute of Craftsmanship",
+    "url": null,
+    "status": "completed",
+    "issued_year": 2025,
+    "sort_order": 3,
+    "note": null
+  },
+  {
+    "name": "Inteligencia Artificial para Todos v1",
+    "issuer": "Cincinnatus Institute of Craftsmanship",
+    "url": null,
+    "status": "completed",
+    "issued_year": 2025,
+    "sort_order": 4,
+    "note": null
+  },
+  {
+    "name": "Fundamentos de Pensamiento Crítico v4",
+    "issuer": "Cincinnatus Institute of Craftsmanship",
+    "url": null,
+    "status": "completed",
+    "issued_year": 2025,
+    "sort_order": 5,
+    "note": null
+  },
+  {
+    "name": "JSCAMP — Full-Stack Bootcamp",
+    "issuer": "Midudev",
+    "url": "https://jscamp.dev",
+    "status": "in_progress",
+    "issued_year": null,
+    "sort_order": 6,
+    "note": {
+      "de": "Laufend. Ich arbeite die Aufgaben von Hand durch, statt das Zertifikat zu kaufen.",
+      "es": "En curso. Trabajo las tareas a mano en lugar de comprar el certificado.",
+      "en": "In progress. I work through the exercises by hand rather than buying the certificate."
+    }
+  },
+  {
+    "name": "Mimo Full-Stack Development",
+    "issuer": "Mimo GmbH",
+    "url": "https://mimo.ai",
+    "status": "in_progress",
+    "issued_year": null,
+    "sort_order": 7,
+    "note": null
+  }
+]

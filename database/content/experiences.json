@@ -1,0 +1,186 @@
+[
+  {
+    "slug": "ptd-talento-lead",
+    "role": {
+      "de": "Lead Tech · Junior Full-Stack (React + Node)",
+      "es": "Lead Tech · Full-Stack Junior (React + Node)",
+      "en": "Lead Tech · Junior Full-Stack (React + Node)"
+    },
+    "organisation": "Cincinnatus Institute of Craftsmanship",
+    "organisation_url": "https://cincinnatus.edu.do",
+    "employment_type": { "de": "Projekt", "es": "Proyecto", "en": "Project" },
+    "location": "Santiago de los Caballeros, RD",
+    "is_remote": false,
+    "start_date": "2026-01-01",
+    "end_date": "2026-10-01",
+    "sort_order": 1,
+    "stack": [
+      "React",
+      "TypeScript",
+      "Redux Toolkit",
+      "Material UI",
+      "Vite",
+      "Node.js",
+      "Express",
+      "TypeORM",
+      "PostgreSQL",
+      "Docker",
+      "Google Cloud",
+      "GitHub Actions",
+      "Swagger"
+    ],
+    "summary": {
+      "de": "Talent-Marketplace, der Studierende des Cincinnatus Institute of Craftsmanship mit Recruitern verbindet. Als Lead Tech in einem Team von vier habe ich den Entwicklungstakt gesetzt, die Reviews geführt und die Releases geschnitten — über 18 Sprints mit wöchentlichen Demos hinweg, mit 74 gemergten Pull Requests und Issues.",
+      "es": "Marketplace de talento que conecta a estudiantes del Cincinnatus Institute of Craftsmanship con recrutadores. Como Lead Tech de un equipo de cuatro fijé el ritmo de desarrollo, conduje las revisiones y corté los releases, a lo largo de 18 sprints con demos semanales y 74 pull requests e issues mergeados.",
+      "en": "A talent marketplace connecting students of the Cincinnatus Institute of Craftsmanship with recruiters. As Lead Tech in a team of four I set the development pace, ran the reviews and cut the releases, across 18 sprints with weekly demos and 74 merged pull requests and issues."
+    },
+    "highlights": {
+      "de": [
+        "Sicherheitsfix auf P1-Niveau: eine Autorisierungslücke in einer Favoriten-Route schliessen, indem der Benutzer aus der authentifizierten Session abgeleitet statt aus der Anfrage übernommen wird.",
+        "Migrationen idempotent machen, nachdem ein Schema-Drift zwischen Umgebungen wiederholt Fehlschläge verursacht hatte — inklusive eines Deploys, der sonst zwischen zwei Releases stecken blieb.",
+        "Ein Audit-Trail für Aktionen im System aufbauen (Epica 08), sowie ein Admin-Panel mit vollständiger Benutzerverwaltung.",
+        "Missbrauch im Bewerbungsformular abwehren: Domain-Allowlist für E-Mail-Adressen plus Rate-Limiting, nach einer Welle von Spamnachrichten aus Frankreich.",
+        "CV- und Profilbild-Uploads von lokalem Speicher nach Google Cloud Storage migrieren, samt Aufräumen der Altdaten.",
+        "Ein KI-gestütztes Profilstärke-Scoring bauen: OpenRouter-Modellaufruf, 15 Sekunden Timeout, JSON-Schema-Prompt und deterministischer heuristischer Fallback."
+      ],
+      "es": [
+        "Corrección de seguridad de nivel P1: cerrar un fallo de autorización en una ruta de favoritos, derivando el usuario de la sesión autenticada en lugar de tomarlo de la petición.",
+        "Hacer idempotentes las migraciones después de que un deriva de esquema entre entornos provocara fallos repetidos, incluido un deploy que si no se quedaba atascado entre dos releases.",
+        "Construir un audit trail de acciones en el sistema (Épica 08), además de un panel de administración con gestión completa de usuarios.",
+        "Defender el formulario de solicitudes contra abuso: allowlist de dominios de correo y rate-limiting, tras una ola de spam desde Francia.",
+        "Migrar las subidas de CV y foto de almacenamiento local a Google Cloud Storage, incluyendo la limpieza de los datos antiguos.",
+        "Construir un scoring de fuerza de perfil con IA: llamada a modelo vía OpenRouter, timeout de 15 segundos, prompt con JSON Schema y fallback heurístico determinista."
+      ],
+      "en": [
+        "P1-level security fix: closed an authorization gap in a favourites route by deriving the user from the authenticated session instead of trusting the request.",
+        "Made migrations idempotent after schema drift between environments kept causing failures, including a deploy that otherwise got stuck between two releases.",
+        "Built an audit trail of actions across the system (Epic 08), plus an admin panel with full user management.",
+        "Hardened the recruiter request form against abuse: an email domain allowlist plus rate limiting, after a wave of spam from France.",
+        "Migrated CV and profile photo uploads from local storage to Google Cloud Storage, including cleaning up the legacy data.",
+        "Built an AI-assisted profile-strength score: an OpenRouter model call, a 15 second timeout, a JSON-schema-constrained prompt and a deterministic heuristic fallback."
+      ]
+    }
+  },
+  {
+    "slug": "freelance-devops",
+    "role": {
+      "de": "Full-Stack-Entwickler · DevOps",
+      "es": "Full-Stack · DevOps",
+      "en": "Full-Stack · DevOps"
+    },
+    "organisation": { "de": "Freelance / Eigene Projekte", "es": "Freelance / Proyectos propios", "en": "Freelance / Own projects" },
+    "organisation_url": "https://github.com/dizzi1222",
+    "employment_type": { "de": "Selbstständig", "es": "Autónomo", "en": "Self-employed" },
+    "location": "Jarabacoa, RD",
+    "is_remote": true,
+    "start_date": "2024-01-01",
+    "end_date": null,
+    "sort_order": 2,
+    "stack": [
+      "Node.js",
+      "Express",
+      "React",
+      "TypeScript",
+      "MongoDB",
+      "PostgreSQL",
+      "Docker",
+      "Git",
+      "Vercel",
+      "Google Cloud",
+      "Railway"
+    ],
+    "summary": {
+      "de": "Meine eigenen Produkte, vom ersten Commit bis zum laufenden Deployment. Jedes davon mit demselben Muster: saubere Architektur, Versionierung, Tests, CI und eine dokumentierte Betriebsumgebung.",
+      "es": "Mis propios productos, del primer commit al deployment en marcha. Todos con el mismo patrón: arquitectura limpia, versionado, tests, CI y un entorno de operación documentado.",
+      "en": "My own products, from the first commit to the running deployment. Each with the same pattern: clean architecture, version control, tests, CI and a documented operating environment."
+    },
+    "highlights": {
+      "de": [
+        "Diese Website ist Teil dieser Kategorie — und bewusst öffentlich gebaut, damit ein Recruiter den Code prüfen kann, ohne mich zu fragen.",
+        "PCE-Agencia: Verwaltungs- und Buchungssystem für eine Reiseagentur mit sieben REST-Ressourcen, JWT-Auth und einer CI-Pipeline mit Typecheck, Linting, Vitest und Build.",
+        "Vollständige NixOS-Konfiguration mit home-manager, verwaltet über Flakes — Desktop, Shell und Server aus einer Quelle."
+      ],
+      "es": [
+        "Este sitio forma parte de esta categoría, y está construido a propósito en abierto para que un recruiter pueda revisar el código sin tener que pedirmelo.",
+        "PCE-Agencia: sistema de gestión y reservas para una agencia de viajes, con siete recursos REST, autenticación JWT y un pipeline de CI con typecheck, linting, vitest y build.",
+        "Configuración completa de NixOS con home-manager, gestionada mediante flakes: escritorio, shell y servidor desde una única fuente."
+      ],
+      "en": [
+        "This site is part of that category, and is deliberately built in public so a recruiter can review the code without having to ask me for it.",
+        "PCE-Agencia: an operations and booking system for a travel agency, with seven REST resources, JWT auth and a CI pipeline running typecheck, linting, vitest and build.",
+        "A complete NixOS configuration with home-manager, managed through flakes: desktop, shell and server from a single source."
+      ]
+    }
+  },
+  {
+    "slug": "cic-bootcamp",
+    "role": {
+      "de": "Bootcamp Full-Stack",
+      "es": "Bootcamp Full-Stack",
+      "en": "Full-Stack Bootcamp"
+    },
+    "organisation": "Cincinnatus Institute of Craftsmanship",
+    "organisation_url": "https://cincinnatus.edu.do",
+    "employment_type": { "de": "Ausbildung", "es": "Formación", "en": "Education" },
+    "location": "República Dominicana",
+    "is_remote": false,
+    "start_date": "2024-09-01",
+    "end_date": "2026-01-01",
+    "sort_order": 3,
+    "stack": ["HTML", "CSS", "JavaScript", "Git", "Docker", "Figma"],
+    "summary": {
+      "de": "Der Startpunkt: von autodidaktischem Neugier zu einer Ausbildung als Entwickler. Hier habe ich die Grundlagen des Full-Stack gelernt und in Teams an echten Projekten gearbeitet — PTD-Talento ist daraus entstanden.",
+      "es": "El punto de partida: de la curiosidad autodidacta a una formación como desarrollador. Aquí aprendí los fundamentos del full-stack y trabajé en equipo en proyectos reales, que dieron lugar a PTD-Talento.",
+      "en": "The starting point: from self-taught curiosity to training as a developer. Here I learned the full-stack fundamentals and worked on real projects in teams, which is where PTD-Talento came from."
+    },
+    "highlights": {
+      "de": [
+        "Fünf Zertifikate im Rahmen des Associate-Developer-Pfads, zwei davon zu künstlicher Intelligenz.",
+        "Projektarbeit in Teams, daraus entstand PTD-Talento als produktiver Beitrag."
+      ],
+      "es": [
+        "Cinco certificaciones dentro de la ruta de Associate Developer, dos de ellas sobre inteligencia artificial.",
+        "Trabajo en equipo en proyectos reales, del que salió PTD-Talento como contribución productiva."
+      ],
+      "en": [
+        "Five certifications within the Associate Developer track, two of them on artificial intelligence.",
+        "Team work on real projects, from which PTD-Talento emerged as a production contribution."
+      ]
+    }
+  },
+  {
+    "slug": "la-sirena",
+    "role": {
+      "de": "Verkaufshilfe / Kundenservice",
+      "es": "Auxiliar de tienda / Atención al cliente",
+      "en": "Shop assistant / Customer service"
+    },
+    "organisation": "La Sirena",
+    "employment_type": { "de": "Angestellte", "es": "Empleado", "en": "Employee" },
+    "location": "Jarabacoa, RD",
+    "is_remote": false,
+    "start_date": "2026-01-01",
+    "end_date": "2026-06-01",
+    "sort_order": 4,
+    "stack": ["Tracker", "PowerK"],
+    "summary": {
+      "de": "Mein erster Kontakt mit formaler Arbeit, in einem der grössten Supermärkte des Landes. fünf Monate in einem Umfeld mit hoher Taktung — und die Entscheidung, das nicht als Lebensweg zu nehmen.",
+      "es": "Mi primer contacto con el trabajo formal, en uno de los supermercados más grandes del país. Cinco meses en un entorno de alto ritmo, y la decisión de no tomarlo como camino de vida.",
+      "en": "My first contact with formal work, in one of the largest supermarkets in the country. Five months in a high-pace environment, and the decision not to take it as a life path."
+    },
+    "highlights": {
+      "de": [
+        "Kasse und Kundenservice unter Zeitdruck, mit hohen Fehlerraten im Uhrenteam.",
+        "Bestandskontrolle, Teilzählungen und das interne System Tracker für die Prozesssteuerung."
+      ],
+      "es": [
+        "Caja y atención al cliente bajo presión, con rates de error altas en el equipo de cajeros.",
+        "Control de inventario, conteos parciales y uso del sistema interno Tracker para la gestión de procesos."
+      ],
+      "en": [
+        "Register and customer service under pressure, with high error rates across the cashier team.",
+        "Inventory control, partial counts and use of the internal Tracker system for process management."
+      ]
+    }
+  }
+]

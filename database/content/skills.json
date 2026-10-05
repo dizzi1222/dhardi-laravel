@@ -1,0 +1,262 @@
+[
+  {
+    "group": "backend",
+    "name": "Laravel",
+    "sort_order": 1,
+    "proof": {
+      "de": "Diese Anwendung: 13.34, Inertia 3, PHPUnit 12, Artisan-Befehle, Mandantenbereitstellung.",
+      "es": "Esta aplicación: 13.34, Inertia 3, PHPUnit 12, comandos Artisan y aprovisionamiento de tenants.",
+      "en": "This application: 13.34, Inertia 3, PHPUnit 12, Artisan commands and tenant provisioning."
+    }
+  },
+  {
+    "group": "backend",
+    "name": "PHP",
+    "sort_order": 2,
+    "proof": {
+      "de": "8.4, strikt typisiert, Pint als Formatter, ausgeliefert über FrankenPHP.",
+      "es": "8.4, tipado estricto, Pint como formateador, desplegado con FrankenPHP.",
+      "en": "8.4, strictly typed, Pint as the formatter, shipped through FrankenPHP."
+    }
+  },
+  {
+    "group": "backend",
+    "name": "Node.js & Express",
+    "sort_order": 3,
+    "proof": {
+      "de": "Produktives Backend in PTD-Talento und PCE-Agencia, mit Middleware-Kette und Swagger.",
+      "es": "Backend productivo en PTD-Talento y PCE-Agencia, con cadena de middleware y Swagger.",
+      "en": "Production backend in PTD-Talento and PCE-Agencia, with a middleware chain and Swagger."
+    }
+  },
+  {
+    "group": "backend",
+    "name": "TypeScript",
+    "sort_order": 4,
+    "proof": {
+      "de": "Strict-Modus mit noUncheckedIndexedAccess und noUnusedLocals, durchgehend im Frontend.",
+      "es": "Modo estricto con noUncheckedIndexedAccess y noUnusedLocals, de punta a punta en el frontend.",
+      "en": "Strict mode with noUncheckedIndexedAccess and noUnusedLocals, end to end on the frontend."
+    }
+  },
+  {
+    "group": "frontend",
+    "name": "React",
+    "sort_order": 1,
+    "proof": {
+      "de": "18 und 19 in zwei Produktiven, plus Inertia-3-Seiten hier.",
+      "es": "18 y 19 en dos productos, más las páginas con Inertia 3 de aquí.",
+      "en": "18 and 19 across two products, plus the Inertia 3 pages here."
+    }
+  },
+  {
+    "group": "frontend",
+    "name": "Inertia.js",
+    "sort_order": 2,
+    "proof": {
+      "de": "Bindet Laravel und React ohne zweite API-Oberfläche und ohne SPA-Router-Duplikat.",
+      "es": "Une Laravel y React sin una segunda superficie de API ni un duplicado de router SPA.",
+      "en": "Binds Laravel and React without a second API surface or a duplicated SPA router."
+    }
+  },
+  {
+    "group": "frontend",
+    "name": "Tailwind CSS",
+    "sort_order": 3,
+    "proof": {
+      "de": "Version 4 mit CSS-first-Konfiguration über die @theme-Direktive.",
+      "es": "Versión 4 con configuración CSS-first mediante la directiva @theme.",
+      "en": "Version 4 with CSS-first configuration through the @theme directive."
+    }
+  },
+  {
+    "group": "frontend",
+    "name": "Redux Toolkit",
+    "sort_order": 4,
+    "proof": {
+      "de": "Zustandsverwaltung im Talent-Marketplace über 18 Sprints.",
+      "es": "Gestión de estado en el marketplace de talento a lo largo de 18 sprints.",
+      "en": "State management in the talent marketplace across 18 sprints."
+    }
+  },
+  {
+    "group": "frontend",
+    "name": "Astro & Svelte",
+    "sort_order": 5,
+    "proof": {
+      "de": "Zwei frühere Portfolio-Projekte, beide dreisprachig und beide live.",
+      "es": "Dos portafolios anteriores, ambos trilingües y ambos en producción.",
+      "en": "Two earlier portfolio projects, both trilingual and both live."
+    }
+  },
+  {
+    "group": "database",
+    "name": "MySQL / PostgreSQL",
+    "sort_order": 1,
+    "proof": {
+      "de": "PostgreSQL 16 produktiv; MySQL-kompatibles Schema für Mandanten mit jeweils eigener Instanz.",
+      "es": "PostgreSQL 16 en producción; esquema compatible con MySQL para tenants con instancia propia.",
+      "en": "PostgreSQL 16 in production; a MySQL-compatible schema for tenants with their own instance."
+    }
+  },
+  {
+    "group": "database",
+    "name": "TypeORM & Prisma",
+    "sort_order": 2,
+    "proof": {
+      "de": "TypeORM in PTD-Talento, Prisma in PCE-Agencia — zwei verschiedene Ansätze, beide produktiv.",
+      "es": "TypeORM en PTD-Talento, Prisma en PCE-Agencia: dos enfoques distintos, ambos en producción.",
+      "en": "TypeORM in PTD-Talento, Prisma in PCE-Agencia — two different approaches, both in production."
+    }
+  },
+  {
+    "group": "database",
+    "name": "Migrationen",
+    "sort_order": 3,
+    "proof": {
+      "de": "Idempotente Migrationen nach Schema-Drift zwischen zwei Umgebungen — eine wiederkehrende Lektion.",
+      "es": "Migraciones idempotentes tras una deriva de esquema entre entornos: una lección recurrente.",
+      "en": "Idempotent migrations after schema drift between two environments — a recurring lesson."
+    }
+  },
+  {
+    "group": "infrastructure",
+    "name": "Docker",
+    "sort_order": 1,
+    "proof": {
+      "de": "Compose für PCE-Agencia; FrankenPHP-Image für das Deployment dieser Anwendung auf Vercel.",
+      "es": "Compose en PCE-Agencia; imagen FrankenPHP para el despliegue de esta aplicación en Vercel.",
+      "en": "Compose for PCE-Agencia; a FrankenPHP image for deploying this application to Vercel."
+    }
+  },
+  {
+    "group": "infrastructure",
+    "name": "Vercel",
+    "sort_order": 2,
+    "proof": {
+      "de": "Drei Projekte live, darunter eine Laravel-Anwendung im Container-Modus.",
+      "es": "Tres proyectos en producción, incluida una aplicación Laravel en modo contenedor.",
+      "en": "Three projects live, including a Laravel application in container mode."
+    }
+  },
+  {
+    "group": "infrastructure",
+    "name": "Google Cloud",
+    "sort_order": 3,
+    "proof": {
+      "de": "App Engine, Cloud SQL mit Proxy, Cloud Storage für Uploads — produktiv für PTD-Talento.",
+      "es": "App Engine, Cloud SQL con proxy y Cloud Storage para subidas, en producción para PTD-Talento.",
+      "en": "App Engine, Cloud SQL with a proxy and Cloud Storage for uploads, in production for PTD-Talento."
+    }
+  },
+  {
+    "group": "infrastructure",
+    "name": "CI/CD",
+    "sort_order": 4,
+    "proof": {
+      "de": "GitHub Actions mit Typecheck, Linting, Tests und Build in PCE-Agencia; Pint, PHPUnit und tsc hier.",
+      "es": "GitHub Actions con typecheck, lint, tests y build en PCE-Agencia; Pint, PHPUnit y tsc aquí.",
+      "en": "GitHub Actions with typecheck, lint, tests and build in PCE-Agencia; Pint, PHPUnit and tsc here."
+    }
+  },
+  {
+    "group": "infrastructure",
+    "name": "NixOS & home-manager",
+    "sort_order": 5,
+    "proof": {
+      "de": "Komplette Rechner-Reproduktion über einen einzigen Rebuild-Befehl.",
+      "es": "Reproducción completa de una máquina con un único comando de rebuild.",
+      "en": "Full machine reproduction from a single rebuild command."
+    }
+  },
+  {
+    "group": "ai",
+    "name": "LLM-APIs",
+    "sort_order": 1,
+    "proof": {
+      "de": "OpenRouter und Anthropic im Gateway dieser Anwendung; OpenRouter im Scoring von PTD-Talento.",
+      "es": "OpenRouter y Anthropic en el gateway de esta aplicación; OpenRouter en el scoring de PTD-Talento.",
+      "en": "OpenRouter and Anthropic in this application's gateway; OpenRouter in PTD-Talento's scoring."
+    }
+  },
+  {
+    "group": "ai",
+    "name": "Zuverlässige KI-Muster",
+    "sort_order": 2,
+    "proof": {
+      "de": "Retry mit Backoff und Jitter, Circuit Breaker, Fallback-Kette, Cache, Guardrails, Observability.",
+      "es": "Reintentos con backoff y jitter, circuit breaker, cadena de fallback, caché, guardrails y observabilidad.",
+      "en": "Retries with backoff and jitter, circuit breaker, fallback chain, caching, guardrails, observability."
+    }
+  },
+  {
+    "group": "ai",
+    "name": "Golden Datasets",
+    "sort_order": 3,
+    "proof": {
+      "de": "Ein auswertbarer Testsatz gegen die Live-Kette, der Prompt- und Modellwechsel aufspürt.",
+      "es": "Un conjunto de casos evaluable contra la cadena viva que detecta cambios de prompt y de modelo.",
+      "en": "An evaluable case set against the live chain that catches prompt and model changes."
+    }
+  },
+  {
+    "group": "ai",
+    "name": "Streaming & SSE",
+    "sort_order": 4,
+    "proof": {
+      "de": "Der Assistent auf dieser Seite, mit ehrlicher Herkunft jeder Antwort.",
+      "es": "El asistente de esta página, con procedencia honesta de cada respuesta.",
+      "en": "The assistant on this page, with honest provenance on every answer."
+    }
+  },
+  {
+    "group": "ai",
+    "name": "MCP",
+    "sort_order": 5,
+    "proof": {
+      "de": "Ein eigener MCP-Server mit SSRF-Schutz und Antwort-Grössenbegrenzung.",
+      "es": "Un servidor MCP propio con protección SSRF y límite de tamaño de respuesta.",
+      "en": "An own MCP server with SSRF protection and a response size cap."
+    }
+  },
+  {
+    "group": "tooling",
+    "name": "Git",
+    "sort_order": 1,
+    "proof": {
+      "de": "Git-Flow und Squash-Merges; zwei Remotes pro Repository mit bewusst getrennten Historien.",
+      "es": "Git Flow y squash merges; dos remotes por repositorio con historiales deliberadamente separados.",
+      "en": "Git flow and squash merges; two remotes per repository with deliberately separate histories."
+    }
+  },
+  {
+    "group": "tooling",
+    "name": "Neovim & Lua",
+    "sort_order": 2,
+    "proof": {
+      "de": "LazyVim als Arbeitsumgebung, LSP für TS/JS/Lua, Treesitter, Telescope.",
+      "es": "LazyVim como entorno de trabajo, LSP para TS/JS/Lua, Treesitter y Telescope.",
+      "en": "LazyVim as the working environment, LSP for TS/JS/Lua, Treesitter and Telescope."
+    }
+  },
+  {
+    "group": "tooling",
+    "name": "PHPUnit",
+    "sort_order": 3,
+    "proof": {
+      "de": "Testsuite dieser Anwendung; Vitest in der CI von PCE-Agencia.",
+      "es": "Suite de tests de esta aplicación; vitest en el CI de PCE-Agencia.",
+      "en": "This application's test suite; vitest in PCE-Agencia's CI."
+    }
+  },
+  {
+    "group": "tooling",
+    "name": "Figma",
+    "sort_order": 4,
+    "proof": {
+      "de": "Eigener Design-System für PTD-Talento, aus dem Tokens in die Komponenten geflossen sind.",
+      "es": "Design system propio para PTD-Talento, del que fluyeron tokens a los componentes.",
+      "en": "An own design system for PTD-Talento, from which tokens flowed into the components."
+    }
+  }
+]

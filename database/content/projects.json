@@ -1,0 +1,417 @@
+[
+  {
+    "slug": "dhardi-laravel",
+    "name": {
+      "de": "Diese Website",
+      "es": "Mi portafolio",
+      "en": "This website"
+    },
+    "role": { "de": "Entwurf, Umsetzung, Betrieb", "es": "Diseño, implementación, operación", "en": "Design, build, operations" },
+    "repo_url": "https://github.com/dizzi1222/dhardi-laravel",
+    "live_url": null,
+    "case_study_url": "/projekt/dhardi-laravel",
+    "year": 2026,
+    "status": "shipped",
+    "is_featured": true,
+    "is_public_repo": true,
+    "sort_order": 1,
+    "stack": [
+      "Laravel 13",
+      "PHP 8.4",
+      "Inertia 3",
+      "React 19",
+      "TypeScript",
+      "Tailwind 4",
+      "PHPUnit 12",
+      "MySQL",
+      "Docker",
+      "FrankenPHP",
+      "Vercel"
+    ],
+    "metrics": {
+      "languages": "3",
+      "backends": "3",
+      "tenancy": "per Instance"
+    },
+    "summary": {
+      "de": "Mein Portfolio und zugleich meine erste produktive Laravel-Basis. Sie ist öffentlich gebaut, hat eine laufende Testsuite und ist auf Vercel in einem Docker-Container mit FrankenPHP ausgeliefert. Der Assistent auf dieser Seite ist ein reales KI-Feature mit Gateway-Schicht, nicht eine Demo ohne Boden.",
+      "es": "Mi portafolio y a la vez mi primera base productiva en Laravel. Está construido en abierto, tiene una suite de tests corriendo y está desplegada en Vercel dentro de un contenedor Docker con FrankenPHP. El asistente de esta página es una feature de IA real con capa de gateway, no una demo sin base.",
+      "en": "My portfolio and, at the same time, my first production Laravel base. It is built in public, has a running test suite, and is deployed to Vercel inside a Docker container with FrankenPHP. The assistant on this page is a real AI feature with a gateway layer, not a demo with nothing under it."
+    },
+    "problem": {
+      "de": "Ein Verzeichnis mit Stack-Einträgen beweist nichts. Die Anforderung «solide Laravel-Erfahrung in Produktion» verlangt etwas, das man prüfen kann: ausgelieferter Code, Tests, Betrieb und eine Architektur, die zu einem Modell passt, das ein Kunde tatsächlich braucht.",
+      "es": "Un directorio con entradas de stack no prueba nada. El requisito de «experiencia sólida en Laravel en producción» pide algo comprobable: código entregado, tests, operación y una arquitectura que encaje con un modelo que un cliente realmente necesita.",
+      "en": "A directory of stack entries proves nothing. The requirement for solid Laravel experience in production demands something checkable: shipped code, tests, operations, and an architecture that fits a model a customer actually needs."
+    },
+    "approach": {
+      "de": "Mandantenfähigkeit pro Instanz statt geteiltem Schema, weil das dem Modell des Kunden entspricht und weil ein Kunde ohnehin seine eigene Instanz bekommt. Ein Gateway für das KI-Feature mit Retries, Circuit Breaker, Fallback-Kette, Cache und Guardrails. Inhalte in der Datenbank statt im Template, damit jede Sprache übersetzbar bleibt und ein Redaktionsschritt genügt. Der Assistent liest dieselben Tabellen, die die Seite rendert — er kann also kein Projekt beschreiben, das die Seite nicht zeigt.",
+      "es": "Multi-tenancy por instancia en lugar de esquema compartido, porque así corresponde al modelo del cliente y porque cada cliente recibe de todos modos su propia instancia. Un gateway para la feature de IA con reintentos, circuit breaker, cadena de fallback, caché y guardrails. Contenido en la base de datos en lugar de la plantilla, para que cada idioma siga siendo traducible y baste un solo paso de redacción. El asistente lee las mismas tablas que renderizan la página, así que no puede describir un proyecto que la página no muestra.",
+      "en": "Instance-based tenancy rather than a shared schema, because it matches the customer's model and because each customer gets their own instance anyway. A gateway for the AI feature with retries, a circuit breaker, a fallback chain, caching and guardrails. Content in the database rather than the template, so every language stays translatable and one editing pass is enough. The assistant reads the same tables that render the page, so it cannot describe a project the page does not show."
+    },
+    "highlights": {
+      "de": [
+        "Circuit Breaker pro Backend mit Half-Open-Zustand: im Zustand «heilend» wird genau eine Sonde zugelassen, damit ein sich erholendes Backend nicht sofort wieder überflutet wird.",
+        "Observability statt Hoffnung: eine Zeile pro Versuch in llm_runs, mit Latenz, Tokens, Kosten und Fehlerklasse. Die Zahlen auf dieser Seite sind Abfragen auf diese Tabelle.",
+        "Guardrails auf Eingabe und Ausgabe, weil Modellantworten nicht vertrauenswürdiger Input für alles sind, was danach kommt.",
+        "Ein Golden Dataset, das per Artisan-Befehl gegen die Live-Kette läuft und nicht-null exitet, wenn ein Prompt- oder Modellwechsel die erwarteten Angaben verändert.",
+        "TypeScript strict mit noUncheckedIndexedAccess und noUnusedLocals; Pint für PHP.",
+        "Auf Vercel in einem Docker-Container mit FrankenPHP und Caddy ausgeliefert — eine Laravel-Anwendung, die auf einer Plattform läuft, die für genau das nicht gedacht ist."
+      ],
+      "es": [
+        "Circuit breaker por backend con estado half-open: en estado «recuperándose» se admite exactamente un sondeo, para que un backend que vuelve no reciba una avalancha de inmediato.",
+        "Observabilidad en lugar de esperanza: una fila por intento en llm_runs, con latencia, tokens, coste y clase de error. Las cifras de esta página son consultas a esa tabla.",
+        "Guardrails de entrada y salida, porque la respuesta de un modelo es entrada no confiable para todo lo que viene después.",
+        "Un golden dataset que se ejecuta contra la cadena viva con un comando Artisan y sale distinto de cero si un cambio de prompt o de modelo altera las respuestas esperadas.",
+        "TypeScript estricto con noUncheckedIndexedAccess y noUnusedLocals; Pint para PHP.",
+        "Desplegada en Vercel en un contenedor Docker con FrankenPHP y Caddy: una aplicación Laravel corriendo en una plataforma que no fue pensada para ello."
+      ],
+      "en": [
+        "A circuit breaker per backend with a half-open state: while recovering, exactly one probe is admitted, so a backend that comes back is not immediately flooded again.",
+        "Observability instead of hope: one row per attempt in llm_runs, with latency, tokens, cost and error class. The figures on this page are queries against that table.",
+        "Guardrails on input and output, because a model's answer is untrusted input for everything downstream of it.",
+        "A golden dataset replayed against the live chain with an Artisan command, which exits non-zero when a prompt or model change alters the expected answers.",
+        "Strict TypeScript with noUncheckedIndexedAccess and noUnusedLocals; Pint for PHP.",
+        "Deployed to Vercel in a Docker container with FrankenPHP and Caddy: a Laravel application running on a platform that was never designed for one."
+      ]
+    }
+  },
+  {
+    "slug": "ptd-talento",
+    "name": "PTD-Talento",
+    "role": { "de": "Lead Tech", "es": "Lead Tech", "en": "Lead Tech" },
+    "repo_url": "https://github.com/Cincinnatus-Institute-of-Craftsmanship/ptd-talento-back",
+    "live_url": "https://ptd-talento-frontend-dev-dot-cic-ptd-dev.ue.r.appspot.com/Inicio",
+    "case_study_url": "/projekt/ptd-talento",
+    "year": 2026,
+    "status": "shipped",
+    "is_featured": true,
+    "is_public_repo": false,
+    "sort_order": 2,
+    "stack": [
+      "React 18",
+      "TypeScript",
+      "Redux Toolkit",
+      "Material UI",
+      "React Router",
+      "Node.js",
+      "Express",
+      "TypeORM",
+      "PostgreSQL",
+      "Docker",
+      "Google Cloud",
+      "Figma",
+      "Swagger"
+    ],
+    "metrics": {
+      "prs": "74",
+      "sprints": "18",
+      "team": "4",
+      "epics": "8"
+    },
+    "summary": {
+      "de": "Produktiver Talent-Marketplace für ein Bildungsinstitut: Google-OAuth, Talentkatalog mit Suche und Filtern, Watchlist für Recruiter, vollständiges Admin-Panel und ein Audit-Trail. React und TypeScript im Frontend mit eigenem Design-System, Express und PostgreSQL im Backend, Docker und Google Cloud für die Auslieferung.",
+      "es": "Marketplace de talento productivo para un instituto educativo: OAuth de Google, catálogo de talentos con búsqueda y filtros, watchlist para recrutadores, panel de administración completo y audit trail. React y TypeScript en el frontend con design system propio, Express y PostgreSQL en el backend, Docker y Google Cloud para la entrega.",
+      "en": "A production talent marketplace for an educational institute: Google OAuth, a talent catalogue with search and filters, a recruiter watchlist, a full admin panel and an audit trail. React and TypeScript on the frontend with an own design system, Express and PostgreSQL on the backend, Docker and Google Cloud for delivery."
+    },
+    "problem": {
+      "de": "Ein Institut mit vielen Studierenden und Recruitern, die sich nicht finden. Teilnahmen an Weiterbildungen sind messbar, Verhalten nicht — und ohne Verhaltensdaten ist jede Empfehlung eine Vermutung.",
+      "es": "Un instituto con muchos estudiantes y recruiters que no se encuentran. La participación en formación es medible; el comportamiento no — y sin datos de comportamiento, cualquier recomendación es una conjetura.",
+      "en": "An institute with many students and recruiters who cannot find each other. Attendance at training is measurable, behaviour is not — and without behavioural data, every recommendation is a guess."
+    },
+    "approach": {
+      "de": "Saubere Trennung zwischen Domänen, ein eigener Design-System in Figma statt ad-hoc-Komponenten, und CI/CD über GitHub Actions mit Google Cloud als Ziel. Migrationen idempotent, damit derselbe Deploy auf zwei Umgebungen dasselbe tut.",
+      "es": "Separación limpia entre dominios, un design system propio en Figma en lugar de componentes ad hoc, y CI/CD con GitHub Actions apuntando a Google Cloud. Migraciones idempotentes, para que el mismo deploy se comporte igual en dos entornos.",
+      "en": "Clean separation between domains, an own design system in Figma instead of ad-hoc components, and CI/CD through GitHub Actions targeting Google Cloud. Idempotent migrations, so the same deploy behaves identically in two environments."
+    },
+    "highlights": {
+      "de": [
+        "Google-OAuth, JWT und Sessions mit rollenbasierten Zugriffskontrollen für Student, Recruiter und Admin.",
+        "Ein Audit-Trail über alle Aktionen im System, mit Admin-Panel für Benutzerverwaltung.",
+        "Upload von CV und Profilbild nach Google Cloud Storage statt auf den App-Server.",
+        "KI-gestütztes Profilstärke-Scoring über OpenRouter, mit heuristischem Fallback ohne Schlüssel.",
+        "Wöchentliche Sprint-Demos von #01 bis #18 — ein Release-Takt, der über acht Epicas hinweg gehalten hat."
+      ],
+      "es": [
+        "OAuth de Google, JWT y sesiones con control de acceso por roles para estudiante, recruiter y administrador.",
+        "Un audit trail de todas las acciones del sistema, con panel de administración para gestión de usuarios.",
+        "Subida de CV y foto de perfil a Google Cloud Storage en lugar del servidor de la aplicación.",
+        "Scoring de fuerza de perfil con IA vía OpenRouter, con fallback heurístico cuando no hay llave.",
+        "Demos semanales de sprint del #01 al #18: un ritmo de releases sostenido a lo largo de ocho épicas."
+      ],
+      "en": [
+        "Google OAuth, JWT and sessions with role-based access control for student, recruiter and admin.",
+        "An audit trail across all system actions, with an admin panel for user management.",
+        "CV and profile photo uploads to Google Cloud Storage rather than the app server.",
+        "AI-assisted profile-strength scoring through OpenRouter, with a heuristic fallback when no key is present.",
+        "Weekly sprint demos from #01 to #18: a release cadence held across eight epics."
+      ]
+    }
+  },
+  {
+    "slug": "pce-agencia",
+    "name": "PCE-Agencia",
+    "role": { "de": "Alleinentwicklung", "es": "Desarrollo individual", "en": "Solo developer" },
+    "repo_url": "https://github.com/dizzi1222/PCE-Agencia",
+    "live_url": "https://pce-agencia.vercel.app",
+    "case_study_url": "/projekt/pce-agencia",
+    "year": 2026,
+    "status": "shipped",
+    "is_featured": true,
+    "is_public_repo": true,
+    "sort_order": 3,
+    "stack": [
+      "Node.js",
+      "Express",
+      "TypeScript",
+      "Prisma",
+      "PostgreSQL",
+      "JWT",
+      "React 19",
+      "Vite",
+      "Tailwind",
+      "Docker",
+      "GitHub Actions"
+    ],
+    "metrics": {
+      "resources": "7",
+      "ci_stages": "4",
+      "tables": "9"
+    },
+    "summary": {
+      "de": "Betriebs- und Buchungssystem für eine Reiseagentur: Kunden, Lieferanten, itinerare, Reservierungen, Transaktionen, Rechnungen und mehr, mit einem React-Dashboard. JWT-Authentifizierung, PostgreSQL 16 über Prisma, Docker Compose für die Reproduzierbarkeit und eine CI-Pipeline mit Typecheck, Linting, Vitest und Build.",
+      "es": "Sistema de gestión y reservas para una agencia de viajes: clientes, proveedores, itinerarios, reservas, transacciones, facturas y más, con un dashboard en React. Autenticación JWT, PostgreSQL 16 mediante Prisma, Docker Compose para reproducibilidad y un pipeline de CI con typecheck, linting, vitest y build.",
+      "en": "An operations and booking system for a travel agency: customers, suppliers, itineraries, bookings, transactions, invoices and more, with a React dashboard. JWT authentication, PostgreSQL 16 through Prisma, Docker Compose for reproducibility, and a CI pipeline with typecheck, linting, vitest and build."
+    },
+    "problem": {
+      "de": "Der Betrieb einer kleinen Reiseagentur lief über Tabellenblätter und WhatsApp. Jede Anfrage zur Auslastung eines Reisenden war eine manuelle Recherche, und Fehler bei Reservierungen kamen erst nach dem Verkauf ans Licht.",
+      "es": "La operación de una agencia de viajes pequeña funcionaba con hojas de cálculo y WhatsApp. Cada consulta sobre la disponibilidad de un viajero era una investigación manual, y los errores de reserva solo aparecían después de la venta.",
+      "en": "A small travel agency's operations ran on spreadsheets and WhatsApp. Every enquiry about a traveller's availability was a manual search, and reservation mistakes only surfaced after the sale."
+    },
+    "approach": {
+      "de": "Eine saubere Resource-Struktur in der REST-API, die für jede Fachdomäne dieselbe Form hat, sodass ein neues Modul keine neue Frage aufwirft. Prisma, um das Schema in der Codebasis sichtbar zu halten. Docker Compose, damit ein Entwickler mit einem Befehl dasselbe wie in CI startet.",
+      "es": "Una estructura de recursos limpia en la API REST, con la misma forma para cada dominio, para que un módulo nuevo no plantee una pregunta nueva. Prisma, para mantener el esquema visible en el código. Docker Compose, para que un desarrollador arranque lo mismo que CI con un solo comando.",
+      "en": "A clean resource structure in the REST API, with the same shape for every domain, so a new module raises no new question. Prisma, to keep the schema visible in the codebase. Docker Compose, so a developer starts the same thing as CI with one command."
+    },
+    "highlights": {
+      "de": [
+        "Sieben REST-Ressourcen mit einheitlichem Verhalten.",
+        "CI in vier Stufen: TypeScript-Typecheck, oxlint, Vitest, Vite-Build.",
+        "Docker Compose für die lokale Entwicklung, mit PostgreSQL 16.",
+        "JWT-Sessions und bcryptjs für Passwörter, ohne eigene Kryptografie."
+      ],
+      "es": [
+        "Siete recursos REST con un comportamiento uniforme.",
+        "CI en cuatro etapas: typecheck de TypeScript, oxlint, vitest y build con Vite.",
+        "Docker Compose para el desarrollo local, con PostgreSQL 16.",
+        "Sesiones JWT y bcryptjs para contraseñas, sin criptografía propia."
+      ],
+      "en": [
+        "Seven REST resources with uniform behaviour.",
+        "CI in four stages: TypeScript typecheck, oxlint, vitest and a Vite build.",
+        "Docker Compose for local development, with PostgreSQL 16.",
+        "JWT sessions and bcryptjs for passwords, with no cryptography of my own."
+      ]
+    }
+  },
+  {
+    "slug": "dhardi-dev",
+    "name": "dhardi.dev",
+    "role": { "de": "Design, Umsetzung, Betrieb", "es": "Diseño, implementación, operación", "en": "Design, build, operations" },
+    "repo_url": "https://github.com/dizzi1222/dhardi.dev",
+    "live_url": "https://dhardidev.vercel.app",
+    "case_study_url": "/projekt/dhardi-dev",
+    "year": 2025,
+    "status": "shipped",
+    "is_featured": false,
+    "is_public_repo": true,
+    "sort_order": 4,
+    "stack": ["Astro 7", "React 19", "TypeScript", "Tailwind 4", "Vite", "Vercel", "Resend"],
+    "metrics": {
+      "languages": "3",
+      "deploy": "Vercel",
+      "migrations": "1"
+    },
+    "summary": {
+      "de": "Mein erstes Portfolio, in Astro gebaut und inzwischen dreisprachig. Es ist der Grund, warum ich Alemán gelernt habe: um einen vollständigen Wörterbuch-Eintrag auf Deutsch zu pflegen, muss man die Sätze wirklich verstehen. Aus Astro ist später Laravel geworden — dieser Übergang ist der Grund für dieses Projekt.",
+      "es": "Mi primer portafolio, construido con Astro y hoy trilingüe. Es la razón por la que aprendí alemán: para mantener un diccionario completo en alemán hay que entender de verdad las frases. De Astro se pasó después a Laravel, y esa transición es el motivo de este proyecto.",
+      "en": "My first portfolio, built with Astro and now trilingual. It is the reason I started learning German: to maintain a complete dictionary entry in German, you have to genuinely understand the sentences. Astro later became Laravel, and that transition is the reason this project exists."
+    },
+    "problem": {
+      "de": "Ein Portfolio, das nur einen Stack auflistet, ist nicht unterscheidbar. Und ein Portfolio in einer Sprache, die nicht meine Muttersprache ist, zwingt entweder zu Übersetzungs-Schlamperei oder zum Aufgeben der zweiten Sprache.",
+      "es": "Un portafolio que solo lista un stack no es diferenciable. Y un portafolio en un idioma que no es el mío obliga a elegir entre traducción descuidada o renunciar al segundo idioma.",
+      "en": "A portfolio that merely lists a stack is not distinguishable. And a portfolio in a language that is not your own forces a choice between sloppy translation and dropping the second language."
+    },
+    "approach": {
+      "de": "Astro wegen der statischen Auslieferung und weil Islands das Prinzip offen zwingen — eine React-Komponente nur dort, wo es Interaktion gibt. Ein Wörterbuch-Objekt mit den drei Sprachen nebeneinander, damit eine fehlende Übersetzung sofort auffällt.",
+      "es": "Astro por la entrega estática y porque las Islands obligan a poner el principio a la vista: un componente React solo donde hay interacción. Un diccionario con los tres idiomas uno al lado del otro, para que una traducción ausente salte a la vista.",
+      "en": "Astro for static delivery, and because islands force the principle into the open: a React component only where there is interaction. A dictionary object with the three languages side by side, so a missing translation is immediately visible."
+    },
+    "highlights": {
+      "de": [
+        "Vollständig dreisprachig, mit Spracherkennung im Browser und Sprachumschalter.",
+        "Kontaktformular über einen Serverless-Endpunkt mit Resend.",
+        "Eine React-Komponente für die animierte Typografie, der Rest bleibt statisch."
+      ],
+      "es": [
+        "Completamente trilingüe, con detección del idioma en el navegador y selector de idioma.",
+        "Formulario de contacto mediante un endpoint serverless con Resend.",
+        "Un componente React para la tipografía animada; el resto sigue siendo estático."
+      ],
+      "en": [
+        "Fully trilingual, with browser language detection and a language switcher.",
+        "Contact form through a serverless endpoint using Resend.",
+        "One React component for the animated typography; the rest stays static."
+      ]
+    }
+  },
+  {
+    "slug": "portfolio-terminal",
+    "name": "portfolio-terminal-dhardi",
+    "role": { "de": "Design, Umsetzung", "es": "Diseño, implementación", "en": "Design, build" },
+    "repo_url": "https://github.com/dizzi1222/portfolio-terminal",
+    "live_url": "https://portfolio-terminal-dhardi.vercel.app",
+    "case_study_url": "/projekt/portfolio-terminal",
+    "year": 2025,
+    "status": "shipped",
+    "is_featured": false,
+    "is_public_repo": true,
+    "sort_order": 5,
+    "stack": ["SvelteKit", "Svelte 5", "TypeScript", "Vite"],
+    "metrics": {
+      "languages": "3",
+      "windows": "9"
+    },
+    "summary": {
+      "de": "Ein Portfolio als Terminal-Oberfläche: Neun Fenster, die sich wie in einem Editor öffnen lassen, mit vollständiger Tastaturnavigation (h/j/k/l, gg, G, /), Suchoverlay und einem integrierten Musikplayer. Gebaut mit SvelteKit und Svelte 5.",
+      "es": "Un portafolio con estética de terminal: nueve ventanas que se abren como en un editor, con navegación completa por teclado (h/j/k/l, gg, G, /), overlay de búsqueda y reproductor de música integrado. Construido con SvelteKit y Svelte 5.",
+      "en": "A portfolio with a terminal interface: nine windows that open like they would in an editor, with full keyboard navigation (h/j/k/l, gg, G, /), a search overlay and an integrated music player. Built with SvelteKit and Svelte 5."
+    },
+    "problem": {
+      "de": "Ein Portfolio, das wie eine Landing-Seite aussieht, ist ununterscheidbar. Die Alternative war, etwas zu bauen, das man bedienen muss statt zu scrollen — mit dem Risiko, dass die Bedienung wichtiger wird als der Inhalt.",
+      "es": "Un portafolio que parece una landing page es indistinguible. La alternativa era construir algo que hay que operar en lugar de desplazar, con el riesgo de que la operación pese más que el contenido.",
+      "en": "A portfolio that looks like a landing page is indistinguishable. The alternative was to build something you have to operate rather than scroll, with the risk of the operation outweighing the content."
+    },
+    "approach": {
+      "de": "Die Bedienung bleibt auf eine Seite beschränkt: drei Tasten, ein Suchfeld, ein Fenster pro Abschnitt. Alles andere ist normales Scrollen. Die deutschsprachigen Projektbeschreibungen habe ich von Hand übersetzt, weil eine Maschinenübersetzung durchschaubar gewesen wäre.",
+      "es": "La operación se limita a una sola pantalla: tres teclas, un campo de búsqueda, una ventana por sección. Todo lo demás es desplazamiento normal. Las descripciones de proyectos en alemán las traduje a mano, porque una traducción automática se habría notado.",
+      "en": "The interaction is confined to a single screen: three keys, a search field, one window per section. Everything else is ordinary scrolling. I translated the German project descriptions by hand, because machine translation would have been obvious."
+    },
+    "highlights": {
+      "de": [
+        "Vollständige Tastaturnavigation, weil eine Oberfläche, die nur mit der Maus bedienbar ist, ihre eigenen Nutzer ausschliesst.",
+        "Sprachumschalter ohne Neuladen, mit drei vollständig übersetzten Sprachen.",
+        "Als Svelte-Projekt gebaut, um Svelte 5 und Runes kennenzulernen — nicht, weil es das richtige Werkzeug für ein Portfolio ist."
+      ],
+      "es": [
+        "Navegación completa por teclado, porque una interfaz que solo se maneja con el ratón excluye a sus propios usuarios.",
+        "Cambio de idioma sin recargar, con tres idiomas traducidos por completo.",
+        "Construido como proyecto Svelte para conocer Svelte 5 y las runes, no porque sea la herramienta correcta para un portafolio."
+      ],
+      "en": [
+        "Full keyboard navigation, because an interface that can only be driven with a mouse excludes its own users.",
+        "Language switching without a reload, with three fully translated languages.",
+        "Built as a Svelte project to learn Svelte 5 and runes, not because Svelte is the right tool for a portfolio."
+      ]
+    }
+  },
+  {
+    "slug": "dotfiles-nixos",
+    "name": "dotfiles-dizzi — NixOS",
+    "role": { "de": "Alleinentwicklung", "es": "Desarrollo individual", "en": "Solo developer" },
+    "repo_url": "https://github.com/dizzi1222/dotfiles-dizzi",
+    "live_url": null,
+    "case_study_url": null,
+    "year": 2026,
+    "status": "shipped",
+    "is_featured": false,
+    "is_public_repo": true,
+    "sort_order": 6,
+    "stack": ["NixOS", "home-manager", "Lua", "Neovim", "Hyprland", "Zsh", "Rust"],
+    "metrics": {
+      "packages": "60+",
+      "rebuild": "1 command"
+    },
+    "summary": {
+      "de": "Mein gesamtes Betriebssystem als Code: NixOS mit home-manager, verwaltet über Flakes. Deklarativ beschrieben, was auf einem Rechner installiert und konfiguriert ist — vom Fenstermanager über die Shell bis zum Editor. Nach einem Wechsel des Rechners reicht ein Rebuild-Befehl.",
+      "es": "Todo mi sistema operativo como código: NixOS con home-manager, gestionado mediante flakes. Descriptivo de forma declarativa qué hay instalado y configurado en una máquina, desde el gestor de ventanas hasta el editor. Tras cambiar de máquina, basta un comando de rebuild.",
+      "en": "My entire operating system as code: NixOS with home-manager, managed through flakes. Declaratively describes what is installed and configured on a machine, from the window manager through the shell to the editor. After switching machines, one rebuild command is enough."
+    },
+    "problem": {
+      "de": "Mehrere Rechner, jedes mit leicht anderen Einstellungen, und jedes Mal von Hand nachgebessert. Die Folge war eine stille Drift: Was auf dem Laptop funktionierte, funktionierte auf dem Desktop nicht, und niemand wusste warum.",
+      "es": "Varias máquinas, cada una con ajustes ligeramente distintos, y cada vez que había que corregirlo a mano. El resultado era una deriva silenciosa: lo que funcionaba en el portátil no funcionaba en el escritorio, y nadie sabía por qué.",
+      "en": "Several machines, each with slightly different settings, each one patched by hand. The result was silent drift: what worked on the laptop did not work on the desktop, and nobody knew why."
+    },
+    "approach": {
+      "de": "Eine Flake als einzige Quelle der Wahrheit, eine Konfiguration pro Feature statt pro Datei, und symlinks statt Kopien — damit eine Änderung sofort überall gilt und der Zustand einer Maschine ablesbar bleibt.",
+      "es": "Una flake como única fuente de verdad, una configuración por feature en lugar de por archivo, y symlinks en lugar de copias: así un cambio surte efecto en todas partes a la vez y el estado de una máquina sigue siendo legible.",
+      "en": "A flake as the single source of truth, one configuration per feature rather than per file, and symlinks instead of copies — so a change takes effect everywhere at once and the state of a machine stays legible."
+    },
+    "highlights": {
+      "de": [
+        "Desktop, Shell und Entwicklungswerkzeuge aus einer Konfiguration.",
+        "Neovim mit LazyVim als LSP-Setup mit Treesitter und Telescope.",
+        "Ein Rebuilt-Befehl für eine neue Maschine, statt einer Anleitung, die man falsch liest."
+      ],
+      "es": [
+        "Escritorio, shell y herramientas de desarrollo desde una única configuración.",
+        "Neovim con LazyVim como configuración de LSP con Treesitter y Telescope.",
+        "Un comando de rebuild para una máquina nueva, en lugar de una guía que alguien leerá mal."
+      ],
+      "en": [
+        "Desktop, shell and developer tooling from a single configuration.",
+        "Neovim with LazyVim as an LSP setup with Treesitter and Telescope.",
+        "One rebuild command for a new machine, instead of a guide somebody will misread."
+      ]
+    }
+  },
+  {
+    "slug": "dataimpulse-mcp",
+    "name": "dataimpulse-mcp — MCP-Server",
+    "role": { "de": "Beitrag zur Multi-Provider-Unterstützung", "es": "Aportación al soporte multi-proveedor", "en": "Contribution to multi-provider support" },
+    "repo_url": "https://github.com/dizzi1222/dataimpulse-mcp",
+    "live_url": null,
+    "case_study_url": null,
+    "year": 2026,
+    "status": "shipped",
+    "is_featured": false,
+    "is_public_repo": true,
+    "sort_order": 7,
+    "stack": ["TypeScript", "Node.js", "MCP"],
+    "metrics": {
+      "tools": "2",
+      "ssrf": "yes"
+    },
+    "summary": {
+      "de": "Ein MCP-Server, der HTTP-Abrufe über einen Residential Proxy führt, damit ein Agent Webseiten abrufen kann, ohne die IP des Nutzers zu verwenden. Basiert auf dem dataimpulse-mcp-Projekt, mein Beitrag ist die Unterstützung mehrerer Proxy-Anbieter.",
+      "es": "Un servidor MCP que enruta peticiones HTTP a través de un proxy residencial, para que un agente pueda consultar páginas sin usar la IP del usuario. Basado en el proyecto dataimpulse-mcp, mi aportación es el soporte para varios proveedores de proxy.",
+      "en": "An MCP server that routes HTTP fetches through a residential proxy, so an agent can fetch pages without using the user's IP. Built on the dataimpulse-mcp project; my contribution is multi-provider proxy support."
+    },
+    "problem": {
+      "de": "Ein Agent, der Webseiten abruft, nutzt die IP des Nutzers. Das ist für jede Zielseite das Signal, an dem Scraper-Verbot erkannt wird — und für den Nutzer ein Grund, die Funktion abzuschalten.",
+      "es": "Un agente que consulta páginas usa la IP del usuario. Para cualquier sitio objetivo, esa es la señal con la que se detecta el bloqueo de scrapers, y para el usuario, una razón para apagar la función.",
+      "en": "An agent fetching web pages uses the user's IP. For any target site that is the signal used to detect scraper blocking, and for the user it is a reason to switch the feature off."
+    },
+    "approach": {
+      "de": "Der Proxy wird pro Anfrage erzeugt statt einmal pro Sitzung, damit keine Verbindung zwischen zwei Anfragen entsteht. Antworten werden auf 1 MiB begrenzt, mit 45 Sekunden Timeout, und die Ziel-URL wird gegen SSRF geprüft — ein Proxy, der beliebige Ziele annimmt, ist selbst das Problem.",
+      "es": "El proxy se crea por petición en vez de una vez por sesión, para que no exista relación entre dos peticiones. Las respuestas se limitan a 1 MiB, con un timeout de 45 segundos, y la URL de destino se valida contra SSRF: un proxy que acepta destinos arbitrarios es el problema en sí.",
+      "en": "The proxy is created per request rather than once per session, so no relationship forms between two requests. Responses are capped at 1 MiB with a 45 second timeout, and the target URL is checked against SSRF — a proxy that accepts arbitrary targets is itself the problem."
+    },
+    "highlights": {
+      "de": [
+        "SSRF-Schutz und Grösse der Antwort als bewusste Grenzen, nicht als Zufall.",
+        "Zwei Tools mit klarer Verantwortung: Seitenabruf und Exit-IP-Prüfung.",
+        "Konfiguration über Umgebungsvariablen, damit keine Zugangsdaten im Repository liegen."
+      ],
+      "es": [
+        "Protección contra SSRF y límite del tamaño de respuesta como límites deliberados, no accidentales.",
+        "Dos herramientas con responsabilidad clara: obtener página y comprobar IP de salida.",
+        "Configuración por variables de entorno, para que no queden credenciales en el repositorio."
+      ],
+      "en": [
+        "SSRF protection and a response size cap as deliberate limits rather than accidents.",
+        "Two tools with clear responsibility: fetch a page, and check the exit IP.",
+        "Configuration through environment variables, so no credentials sit in the repository."
+      ]
+    }
+  }
+]

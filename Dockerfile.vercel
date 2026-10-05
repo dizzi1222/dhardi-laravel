@@ -1,0 +1,98 @@
+# syntax=docker/dockerfile:1
+
+# Frontend assets. Done in its own stage so a copy-only change to application
+# code does not invalidate the npm layer — which on a cold build is the
+# difference between seconds and a couple of minutes.
+FROM node:24-bookworm-slim AS assets
+
+WORKDIR /app
+
+# Copied before the manifest so the install layer is cached independently of the
+# lockfile's consumers.
+COPY package.json package-lock.json ./
+
+# `--ignore-scripts` because the only lifecycle script we would run is optional,
+# and running arbitrary postinstall hooks during an image build is not something
+# to opt into by default.
+RUN npm ci --ignore-scripts
+
+COPY resources/js ./resources/js
+COPY resources/css ./resources/css
+COPY vite.config.ts tsconfig.json ./
+
+RUN npm run build
+
+
+# Composer dependencies. Also a separate stage, and also `--no-dev`, so the
+# runtime image carries no test or dev tooling.
+FROM composer:2 AS vendor
+
+WORKDIR /app
+
+COPY composer.json composer.lock ./
+
+# No scripts: `package:discover` runs in the runtime stage, after the full
+# application source is present.
+RUN composer install \
+    --no-dev \
+    --no-interaction \
+    --no-progress \
+    --no-scripts \
+    --prefer-dist \
+    --optimize-autoloader
+
+
+FROM dunglas/frankenphp:1-php8.4-bookworm AS runtime
+
+# intl for the locale-aware helpers, pdo_mysql for production, opcache because a
+# request-per-instance model pays the compile cost on every cold start.
+RUN install-php-extensions intl pdo_mysql opcache \
+ && cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+WORKDIR /app
+
+ENV APP_ENV=production \
+    APP_DEBUG=false \
+    LOG_CHANNEL=stderr \
+    CACHE_STORE=database \
+    SESSION_DRIVER=database \
+    QUEUE_CONNECTION=sync \
+    DB_CONNECTION=sqlite \
+    DB_DATABASE=/app/database/database.sqlite \
+    COMPOSER_ALLOW_SUPERUSER=1
+
+COPY --from=vendor /app/vendor ./vendor
+COPY . .
+
+COPY --from=assets /app/public/build ./public/build
+
+# The application source is present now, so package discovery can run and the
+# autoloader can be rebuilt against the real class list.
+RUN php artisan package:discover --ansi \
+ && php artisan route:cache --ansi \
+ && chown -R www-data:www-data /app/storage /app/bootstrap/cache
+
+# The content is baked into the image.
+#
+# A container function has a writable filesystem for the life of the instance,
+# but nothing survives a scale-in. Seeding at build time means the portfolio —
+# the part a visitor actually reads — is present on every cold start instead of
+# depending on a database that may not be configured yet. The writable copies
+# the application makes afterwards (audit rows, transcripts) are best-effort:
+# see App\Support\BestEffort.
+RUN touch /app/database/database.sqlite \
+ && php artisan migrate --force --ansi \
+ && php artisan db:seed --force --ansi
+
+COPY --chown=www-data:www-data Caddyfile /etc/frankenphp/Caddyfile
+
+# Binding to a privileged port inside the container and letting the platform map
+# it is the arrangement that works with a runtime that expects PORT.
+RUN setcap 'CAP_NET_BIND_SERVICE=+eip' /usr/local/bin/frankenphp \
+ && chown -R www-data:www-data /config/caddy /data/caddy
+
+USER www-data
+
+EXPOSE 80
+
+CMD ["frankenphp", "run", "--config", "/etc/frankenphp/Caddyfile"]

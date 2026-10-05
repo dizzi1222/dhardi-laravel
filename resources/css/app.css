@@ -1,0 +1,142 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/*
+ | Design tokens
+ | A deliberately narrow palette: warm paper, near-black ink, and one signal
+ | colour borrowed from the Swiss flag. Restraint is the point — the content is
+ | the argument, and a busy page would compete with it.
+ */
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+    --color-paper: #f7f6f3;
+    --color-paper-raised: #fffefb;
+    --color-ink: #111214;
+    --color-ink-soft: #3d4046;
+    --color-ink-mute: #6d7178;
+    --color-ink-faint: #a8acb3;
+    --color-rule: #ddd9d1;
+    --color-rule-soft: #ebe7e0;
+
+    --color-signal: #c8102e;
+    --color-signal-soft: #fbe9eb;
+    --color-verify: #0f6b52;
+    --color-verify-soft: #e4f2ed;
+    --color-warn: #9a6b00;
+    --color-warn-soft: #fbf1dc;
+
+    --spacing-gutter: 1.5rem;
+
+    --radius-none: 0;
+
+    --text-hero: clamp(2.5rem, 6.5vw, 4.5rem);
+}
+
+/*
+ | Base
+ */
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+        scroll-padding-top: 5rem;
+    }
+
+    body {
+        text-rendering: optimizeLegibility;
+    }
+
+    /* Focus is always visible. A portfolio that is navigated with a keyboard
+       has to look deliberate in that state. */
+    :focus-visible {
+        outline: 2px solid var(--color-signal);
+        outline-offset: 3px;
+    }
+
+    ::selection {
+        background: var(--color-signal);
+        color: var(--color-paper-raised);
+    }
+
+    h1,
+    h2,
+    h3 {
+        text-wrap: balance;
+        letter-spacing: -0.02em;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+}
+
+/*
+ | Reusable primitives
+ */
+@layer components {
+    .shell {
+        width: 100%;
+        max-width: 76rem;
+        margin-inline: auto;
+        padding-inline: 1.5rem;
+    }
+
+    @media (width < 468px) {
+        .shell {
+            padding-inline: 1.25rem;
+        }
+    }
+
+    /* Section numbering in the margin, like a printed technical document. */
+    .rule {
+        border-top: 1px solid var(--color-rule);
+    }
+
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--color-ink-mute);
+    }
+
+    .tag {
+        font-family: var(--font-mono);
+        font-size: 0.6875rem;
+        letter-spacing: 0.02em;
+        padding: 0.1875rem 0.5rem;
+        border: 1px solid var(--color-rule);
+        border-radius: 999px;
+        color: var(--color-ink-soft);
+        white-space: nowrap;
+    }
+
+    .tabular {
+        font-family: var(--font-mono);
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* Thin, unobtrusive scrollbars inside panels. */
+    .scroll-quiet {
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-rule) transparent;
+    }
+}
+
+/*
+ | Motion
+ | Honours the user's OS setting rather than animating regardless.
+ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

@@ -1,0 +1,15 @@
+docker/
+node_modules/
+vendor/
+.env
+.env.*
+!.env.example
+database/*.sqlite
+database/*.sqlite-journal
+storage/*.key
+.phpunit.cache
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log
+.DS_Store
+Thumbs.db
