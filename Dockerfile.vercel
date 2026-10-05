@@ -31,8 +31,9 @@ WORKDIR /app
 
 COPY composer.json composer.lock ./
 
-# No scripts: `package:discover` runs in the runtime stage, after the full
-# application source is present.
+# No scripts here: `package:discover` runs in the runtime stage, where the full
+# application source and the database file are present. Running it now would
+# write a package manifest from a tree that has no application around it.
 RUN composer install \
     --no-dev \
     --no-interaction \
@@ -66,8 +67,14 @@ COPY . .
 
 COPY --from=assets /app/public/build ./public/build
 
-# The application source is present now, so package discovery can run and the
-# autoloader can be rebuilt against the real class list.
+# The application source is present now, so the package manifest can be built
+# and the routes cached.
+#
+# `bootstrap/cache/*.php` is excluded by `.dockerignore`, which is load-bearing
+# rather than tidy. A developer's machine has a `packages.php` that lists dev
+# providers — Laravel Boost among them — and that manifest would be read back
+# here and fail on a class the `--no-dev` install does not contain. Building it
+# fresh from this image's own vendor directory is the fix.
 RUN php artisan package:discover --ansi \
  && php artisan route:cache --ansi \
  && chown -R www-data:www-data /app/storage /app/bootstrap/cache
