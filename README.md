@@ -20,6 +20,7 @@ measured — which is the part of the stack I want to be judged on.
 ## Table of contents
 
 - [Stack](#stack)
+- [Notes from running this on Vercel](#notes-from-running-this-on-vercel)
 - [Requirements](#requirements)
 - [Quickstart](#quickstart)
 - [Environment variables](#environment-variables)
@@ -43,8 +44,54 @@ measured — which is the part of the stack I want to be judged on.
 | Backend    | Laravel 13.34, PHP 8.4                                      |
 | Frontend   | React 19, TypeScript (strict), Inertia 3, Tailwind CSS 4    |
 | Data       | MySQL in production, SQLite for local development           |
-| Tests      | PHPUnit, one suite for unit and feature tests          |
+| Tests      | PHPUnit 12, one suite for unit and feature tests           |
 | Deployment | Vercel, container runtime, FrankenPHP + Caddy inside Docker |
+
+**Live:** <https://dhardi-laravel.vercel.app> · **Repo:** <https://github.com/dizzi1222/dhardi-laravel>
+
+---
+
+## Notes from running this on Vercel
+
+Three things cost real time and are worth writing down, because each one looks
+healthy until it does not.
+
+### `APP_KEY` must be a `config` variable, not a `secret`
+
+Vercel masks `secret` variables when injecting them into the container, so
+`APP_KEY` arrives as the literal string `[SENSITIVE]`.
+`EncryptionServiceProvider` cannot decode it, and every route that touches the
+encrypter returns a 500 while the health check and the API endpoints keep
+answering. That split is what makes it hard to spot from the outside.
+
+```bash
+vercel env add APP_KEY production --type=config --value "base64:$(openssl rand -base64 32)"
+```
+
+### A Caddy site address that parses is not the same as one that works
+
+Three spellings of the same address, all of which start a server:
+
+| Address                        | Behaviour                                                     |
+| ------------------------------ | ------------------------------------------------------------- |
+| `:80`                          | Treated as a domain named `80`, retries a certificate for 3 days |
+| `http://:80`                   | Works. TLS and the HTTPS redirect are off, one handler per request |
+| `http://{$PORT:80}`            | **200 with a zero-length body on every route.** PHP never runs |
+
+The last one is the dangerous one: the config adapts without complaint and every
+request returns a success status. `try_files` inside `php_server` has the same
+effect for a different reason — it resolves and serves before handing off to PHP.
+
+### Reading a prompt back from the database
+
+`CompanionService` originally assembled its message list by reading the
+transcript back out. On an instance where the transcript cannot be written, the
+history came back empty, the gateway received a prompt with no user turn, and
+the input guardrails never saw the text they exist to reject. A prompt-injection
+filter that only runs when the database accepts writes is not a control. The
+question is now placed in memory and the stored history is only a supplement.
+
+---
 
 ## Requirements
 
@@ -410,5 +457,19 @@ or `npm run dev` while working locally.
 **The assistant returns 422 with a rule name.** An input guardrail rejected the
 prompt. The rule is in the response; `config/llm.php` lists the fragments.
 
+**Every HTML route returns 500 but the API endpoints work.**  is
+probably a  variable, which Vercel injects as the literal string
+. Recreate it as . See the notes section above.
+
+**The assistant answers but nothing is recorded.** Expected: on a platform with
+no durable disk the audit rows and transcripts degrade to log lines rather than
+failing the request. That is the  path working.
+
 **Cold starts are slow.** The image is doing work that belongs at build time.
-Check that `composer install --no-dev` ran in the image, not at runtime.
+Check that 
+  [37;44m INFO [39;49m Discovering packages.  
+
+  inertiajs/inertia-laravel [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
+  laravel/tinker [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
+  nesbot/carbon [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
+  nunomaduro/termwind [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m ran in the image, not at runtime.

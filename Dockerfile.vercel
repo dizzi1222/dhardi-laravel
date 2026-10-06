@@ -50,6 +50,22 @@ FROM dunglas/frankenphp:1-php8.4-bookworm AS runtime
 RUN install-php-extensions intl pdo_mysql opcache \
  && cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
+# FrankenPHP serves the response over its own writer, so PHP must never flush
+# output on its own. With display_errors on, any notice emitted during bootstrap
+# becomes response body, the headers are considered already sent, and
+# Symfony's sendHeaders() throws "Cannot modify header information" — a 500 on
+# every HTML page while the API routes keep working.
+RUN { \
+      echo 'display_errors = Off'; \
+      echo 'display_startup_errors = Off'; \
+      echo 'log_errors = On'; \
+      echo 'error_log = /dev/stderr'; \
+      echo 'output_buffering = 4096'; \
+      echo 'zlib.output_compression = Off'; \
+      echo 'implicit_flush = Off'; \
+      echo 'memory_limit = 256M'; \
+    } > "$PHP_INI_DIR/conf.d/app.ini"
+
 WORKDIR /app
 
 ENV APP_ENV=production \
