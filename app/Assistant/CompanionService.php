@@ -169,18 +169,36 @@ final class CompanionService
         ]);
     }
 
+    /**
+     * Assembles the message list for the model.
+     *
+     * The current question is always placed in memory, and the stored history is
+     * only a supplement. Reading the prompt back out of the database instead
+     * looks equivalent and is not: on a platform where the transcript cannot be
+     * written, the history comes back empty, the gateway receives a prompt with
+     * no user turn, and the input guardrails never see the text they exist to
+     * reject. A prompt-injection filter that only runs when the database happens
+     * to be writable is not a control.
+     *
+     * @return array<int, array{role: string, content: string}>
+     */
     private function buildRequest(Conversation $conversation, string $question): LlmRequest
     {
-        $messages = $conversation->messages()
-            ->latest('id')
-            ->limit(self::HISTORY_LIMIT)
-            ->get(['role', 'content'])
-            ->reverse()
-            ->map(static fn (Message $message): array => [
-                'role' => $message->role,
-                'content' => $message->content,
-            ])
-            ->all();
+        $history = $conversation->getKey() === null
+            ? []
+            : $conversation->messages()
+                ->latest('id')
+                ->limit(self::HISTORY_LIMIT)
+                ->get(['role', 'content'])
+                ->reverse()
+                ->map(static fn (Message $message): array => [
+                    'role' => $message->role,
+                    'content' => $message->content,
+                ])
+                ->all();
+
+        $messages = $this->withoutTrailingUserTurn($history);
+        $messages[] = ['role' => 'user', 'content' => $question];
 
         return new LlmRequest(
             messages: $messages,
@@ -210,6 +228,25 @@ final class CompanionService
             'stack' => (string) trans('assistant.stack_line'),
             'maxChars' => (int) config('llm.guardrails.max_output_chars'),
         ]);
+    }
+
+    /**
+     * The user's turn was already appended by `resolveConversation`, so the
+     * stored history ends with it. Dropping that duplicate keeps the prompt
+     * free of the question appearing twice.
+     *
+     * @param  array<int, array{role: string, content: string}>  $history
+     * @return array<int, array{role: string, content: string}>
+     */
+    private function withoutTrailingUserTurn(array $history): array
+    {
+        $last = $history === [] ? null : $history[array_key_last($history)];
+
+        if (($last['role'] ?? null) === 'user') {
+            array_pop($history);
+        }
+
+        return $history;
     }
 
     private function persist(Conversation $conversation, CompanionAnswer $answer): void
