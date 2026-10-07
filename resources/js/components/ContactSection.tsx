@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react';
 import Section from './Section';
 import { useT } from '../lib/i18n';
 import type { Profile } from '../types';
@@ -55,13 +56,13 @@ export default function ContactSection({ profile }: { profile: Profile }) {
                 ))}
 
                 <li>
-                    <a
-                        href="/cv.pdf"
+                    <Link
+                        href="/lebenslauf"
                         className="flex items-baseline justify-between gap-4 py-3 text-sm transition-colors hover:text-signal"
                     >
                         <span className="eyebrow">PDF</span>
                         <span>{t('ui.sections.contact.cv_label')}</span>
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </Section>

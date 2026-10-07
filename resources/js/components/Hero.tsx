@@ -1,4 +1,4 @@
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useT } from '../lib/i18n';
 import type { HomeProps } from '../types';
 
@@ -49,12 +49,12 @@ export default function Hero() {
                             {hero.cta}
                         </a>
 
-                        <a
-                            href="/cv.pdf"
+                        <Link
+                            href="/lebenslauf"
                             className="inline-flex items-center gap-2 rounded-full border border-rule px-5 py-2.5 text-sm font-medium text-ink-soft transition-colors hover:border-ink hover:text-ink"
                         >
                             {hero.secondaryCta}
-                        </a>
+                        </Link>
                     </div>
 
                     <p className="mt-8 max-w-2xl text-sm leading-relaxed text-ink-mute">

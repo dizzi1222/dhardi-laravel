@@ -53,6 +53,7 @@ Route::get('/lebenslauf', function (): Response {
             'location' => (string) trans('cv.location'),
             'availability' => (string) trans('cv.availability'),
             'print' => (string) trans('cv.print'),
+            'pdf_original' => (string) trans('cv.pdf_original'),
             'notice_title' => (string) trans('cv.notice_title'),
             'notice_body' => (string) trans('cv.notice_body'),
             'sections' => [

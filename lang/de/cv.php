@@ -24,6 +24,7 @@ return [
     'availability' => 'Verfügbar: nachmittags',
 
     'print' => 'Als PDF drucken',
+    'pdf_original' => 'Original-CV herunterladen (PDF, Spanisch)',
 
     'notice_title' => 'Hinweis zur Version',
     'notice_body' => 'Diese Version ist aus dem spanischen Original übersetzt. Die dort genannten Technologien (.NET, C#, SQL Server, Angular) sind im Portfolio-Repository nicht durch Quellcode belegt; mein dokumentierter Schwerpunkt liegt auf Node.js, Express, PostgreSQL, React und Laravel. Ich liste beide unverändert auf, statt Einträge stillschweigend zu streichen.',

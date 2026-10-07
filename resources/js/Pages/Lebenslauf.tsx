@@ -47,6 +47,7 @@ interface Props {
         location: string;
         availability: string;
         print: string;
+        pdf_original: string;
         notice_title: string;
         notice_body: string;
         sections: {
@@ -73,6 +74,31 @@ export default function Lebenslauf({ cv, meta, displayName, email, phone }: Prop
             <Head title={meta.title}>
                 <meta name="description" content={meta.description} />
             </Head>
+
+            {/*
+                Hidden on screen, visible in print. A print stylesheet cannot
+                add a control the layout does not already have, so the button
+                lives here rather than in a floating toolbar that would then
+                need hiding.
+            */}
+            <div className="mx-auto max-w-3xl px-6 pt-10 print:hidden">
+                <div className="flex flex-wrap items-center gap-3">
+                    <button
+                        type="button"
+                        onClick={() => window.print()}
+                        className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-paper transition-opacity hover:opacity-88"
+                    >
+                        {cv.print}
+                    </button>
+
+                    <a
+                        href="/cv.pdf"
+                        className="text-sm text-ink-mute underline-offset-4 hover:text-ink hover:underline"
+                    >
+                        {cv.pdf_original}
+                    </a>
+                </div>
+            </div>
 
             <main className="mx-auto max-w-3xl px-6 py-12 print:px-0 print:py-0">
                 <header className="border-b border-rule pb-6">

@@ -65,12 +65,12 @@ export default function SiteHeader() {
                 </nav>
 
                 <div className="ml-auto flex items-center gap-4">
-                    <a
-                        href="/cv.pdf"
+                    <Link
+                        href="/lebenslauf"
                         className="hidden text-sm text-ink-mute transition-colors hover:text-ink sm:inline"
                     >
                         {t('ui.cv')}
-                    </a>
+                    </Link>
 
                     <div
                         className="flex items-center gap-0.5"
