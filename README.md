@@ -88,8 +88,23 @@ effect for a different reason — it resolves and serves before handing off to P
 transcript back out. On an instance where the transcript cannot be written, the
 history came back empty, the gateway received a prompt with no user turn, and
 the input guardrails never saw the text they exist to reject. A prompt-injection
-filter that only runs when the database accepts writes is not a control. The
-question is now placed in memory and the stored history is only a supplement.
+filter that only runs when the database happens to be writable is not a control.
+The question is now placed in memory and the stored history is only a
+supplement.
+
+### Trusting the proxy, or the page loads blank
+
+Without `trustProxies`, the platform's TLS termination makes Laravel believe
+every request is insecure, and every generated URL comes out as `http://` —
+including the Vite asset tags. The browser blocks those as mixed active content,
+so the document arrives, returns 200, and renders with no styles and no
+JavaScript.
+
+The reason this is worth a test is that no status code reports it.
+`GeneratedUrlsTest` asserts on the scheme inside the markup, and it reproduces
+the real shape of the request: an `http` URL plus an `X-Forwarded-Proto` header.
+Asking for an `https` URL directly would hide the bug, because the framework
+would never consult the header at all.
 
 ---
 
@@ -137,11 +152,15 @@ server together. `http://localhost:8000` serves the site, and with no AI
 credentials configured the assistant answers through the deterministic
 responder, so every feature is usable immediately.
 
+> **Building the assets is not optional.** The Blade shell calls `@vite`, which
+> throws when `public/build/manifest.json` is missing. If the page returns a 500
+> about a missing manifest, run `npm run build` once before `php artisan serve`.
+
 To run the pieces separately:
 
 ```bash
-php artisan serve            # application
 npm run dev                  # asset build with hot reload
+php artisan serve            # application only, expects a prior `npm run build`
 php artisan queue:work       # if you add queued work
 ```
 
