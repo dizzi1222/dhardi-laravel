@@ -74,19 +74,44 @@ final class GeneratedUrlsTest extends TestCase
         }
     }
 
+    /**
+     * URLs on the application's own origin must all be https.
+     *
+     * Asset URLs served by a running Vite dev server are deliberately exempt:
+     * that server listens on plain HTTP on localhost, so asserting https there
+     * would fail on a developer's machine while telling you nothing about
+     * production. The bug this guards against only ever affects URLs the
+     * application generates, which all share the request's host.
+     */
     public function test_generated_urls_are_absolute_and_https(): void
     {
         $markup = $this->getHomeMarkup();
 
         preg_match_all('/href="(https?:\/\/[^"]+)"/', $markup, $matches);
 
-        foreach ($matches[1] as $url) {
+        $applicationUrls = array_values(array_filter(
+            $matches[1],
+            static fn (string $url): bool => ! self::isAssetServer($url),
+        ));
+
+        self::assertNotEmpty($applicationUrls, 'The page is expected to generate absolute URLs.');
+
+        foreach ($applicationUrls as $url) {
             self::assertStringStartsWith(
                 'https://',
                 $url,
                 "Generated URL is not https: {$url}",
             );
         }
+    }
+
+    /**
+     * Whether the URL points at the Vite dev server rather than at this
+     * application.
+     */
+    private static function isAssetServer(string $url): bool
+    {
+        return (bool) preg_match('#^https?://(\[::1\]|localhost|127\.0\.0\.1):\d+#', $url);
     }
 
     public function test_the_canonical_and_hreflang_alternates_are_https(): void

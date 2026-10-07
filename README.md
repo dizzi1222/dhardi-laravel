@@ -2,8 +2,8 @@
 
 A multilingual portfolio built as a real Laravel application rather than a
 static site that mentions Laravel. It exists to answer one question with
-evidence instead of adjectives: *can this person ship and operate Laravel in
-production?*
+evidence instead of adjectives: _can this person ship and operate Laravel in
+production?_
 
 The live site is in German, Spanish and English. The AI assistant you can talk
 to on it runs through a reliability layer that is instrumented, tested and
@@ -44,7 +44,7 @@ measured — which is the part of the stack I want to be judged on.
 | Backend    | Laravel 13.34, PHP 8.4                                      |
 | Frontend   | React 19, TypeScript (strict), Inertia 3, Tailwind CSS 4    |
 | Data       | MySQL in production, SQLite for local development           |
-| Tests      | PHPUnit 12, one suite for unit and feature tests           |
+| Tests      | PHPUnit 12, one suite for unit and feature tests            |
 | Deployment | Vercel, container runtime, FrankenPHP + Caddy inside Docker |
 
 **Live:** <https://dhardi-laravel.vercel.app> · **Repo:** <https://github.com/dizzi1222/dhardi-laravel>
@@ -72,11 +72,11 @@ vercel env add APP_KEY production --type=config --value "base64:$(openssl rand -
 
 Three spellings of the same address, all of which start a server:
 
-| Address                        | Behaviour                                                     |
-| ------------------------------ | ------------------------------------------------------------- |
-| `:80`                          | Treated as a domain named `80`, retries a certificate for 3 days |
-| `http://:80`                   | Works. TLS and the HTTPS redirect are off, one handler per request |
-| `http://{$PORT:80}`            | **200 with a zero-length body on every route.** PHP never runs |
+| Address             | Behaviour                                                          |
+| ------------------- | ------------------------------------------------------------------ |
+| `:80`               | Treated as a domain named `80`, retries a certificate for 3 days   |
+| `http://:80`        | Works. TLS and the HTTPS redirect are off, one handler per request |
+| `http://{$PORT:80}` | **200 with a zero-length body on every route.** PHP never runs     |
 
 The last one is the dangerous one: the config adapts without complaint and every
 request returns a success status. `try_files` inside `php_server` has the same
@@ -110,12 +110,12 @@ would never consult the header at all.
 
 ## Requirements
 
-| Tool       | Version                    | Notes                                          |
-| ---------- | -------------------------- | ---------------------------------------------- |
-| PHP        | 8.4                        | Needs `pdo_mysql`, `pdo_sqlite`, `intl`, `mbstring`, `dom` |
-| Composer   | 2.x                        |                                                |
-| Node.js    | 20 or newer                | Built and tested on 24                         |
-| npm        | 10 or newer                | A `package-lock.json` is committed             |
+| Tool     | Version     | Notes                                                      |
+| -------- | ----------- | ---------------------------------------------------------- |
+| PHP      | 8.4         | Needs `pdo_mysql`, `pdo_sqlite`, `intl`, `mbstring`, `dom` |
+| Composer | 2.x         |                                                            |
+| Node.js  | 20 or newer | Built and tested on 24                                     |
+| npm      | 10 or newer | A `package-lock.json` is committed                         |
 
 Verify before starting:
 
@@ -127,6 +127,20 @@ npm -v
 ```
 
 ## Quickstart
+
+### dhardi-laravel (Laravel 13 + Inertia 3 + React 19)
+
+```bash
+cd dhardi-laravel
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+touch database/database.sqlite
+php artisan migrate --seed
+composer run dev
+# → http://localhost:8000 (alemán por defecto; ?lang=es / ?lang=en)
+```
 
 From a clean checkout:
 
@@ -178,17 +192,17 @@ php artisan route:cache
 Everything is documented in [`.env.example`](.env.example). The ones that are
 not obvious:
 
-| Variable                              | Why it matters                                                                                     |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `APP_LOCALE`                          | Default language. German, because it is the primary language of the site.                            |
-| `TENANT_SLUG`                         | Which customer this instance serves. One deployment per customer, so it is baked in.                 |
-| `ANTHROPIC_API_KEY`                   | Enables the primary model backend. Optional.                                                       |
-| `OPENROUTER_API_KEY`                  | Enables the fallback backend. Optional.                                                            |
-| `LLM_MAX_ATTEMPTS`                    | Attempt budget per backend before the chain moves on.                                              |
-| `LLM_BREAKER_THRESHOLD`               | Consecutive failures that trip the circuit breaker.                                                |
-| `LLM_BREAKER_COOLDOWN`                | Seconds before a tripped breaker admits a probe.                                                   |
-| `LLM_CACHE_TTL`                       | Seconds a prompt answer is reused.                                                                 |
-| `PORTFOLIO_TEST_COUNT`                | Test count shown on the site. Update it when the suite grows.                                      |
+| Variable                | Why it matters                                                                       |
+| ----------------------- | ------------------------------------------------------------------------------------ |
+| `APP_LOCALE`            | Default language. German, because it is the primary language of the site.            |
+| `TENANT_SLUG`           | Which customer this instance serves. One deployment per customer, so it is baked in. |
+| `ANTHROPIC_API_KEY`     | Enables the primary model backend. Optional.                                         |
+| `OPENROUTER_API_KEY`    | Enables the fallback backend. Optional.                                              |
+| `LLM_MAX_ATTEMPTS`      | Attempt budget per backend before the chain moves on.                                |
+| `LLM_BREAKER_THRESHOLD` | Consecutive failures that trip the circuit breaker.                                  |
+| `LLM_BREAKER_COOLDOWN`  | Seconds before a tripped breaker admits a probe.                                     |
+| `LLM_CACHE_TTL`         | Seconds a prompt answer is reused.                                                   |
+| `PORTFOLIO_TEST_COUNT`  | Test count shown on the site. Update it when the suite grows.                        |
 
 **No credentials are required to run the project.** With none of them set the
 chain falls through to the deterministic responder. That is deliberate: a demo
@@ -242,7 +256,7 @@ helper:
 
 ```ts
 const t = useT();
-t('ui.sections.projects.heading');
+t("ui.sections.projects.heading");
 ```
 
 A missing key renders the key itself rather than an empty string, so a gap is
@@ -253,13 +267,13 @@ which makes a missing translation obvious while editing:
 
 ```json
 {
-  "slug": "pce-agencia",
-  "name": "PCE-Agencia",
-  "summary": {
-    "de": "Betriebs- und Buchungssystem für eine Reiseagentur …",
-    "es": "Sistema de gestión y reservas para una agencia de viajes …",
-    "en": "An operations and booking system for a travel agency …"
-  }
+    "slug": "pce-agencia",
+    "name": "PCE-Agencia",
+    "summary": {
+        "de": "Betriebs- und Buchungssystem für eine Reiseagentur …",
+        "es": "Sistema de gestión y reservas para una agencia de viajes …",
+        "en": "An operations and booking system for a travel agency …"
+    }
 }
 ```
 
@@ -311,16 +325,16 @@ Every request goes through `App\Llm\LlmGateway`, in this order:
 
 1. **Input guardrails** — length, control characters, prompt-injection
    fragments. Rejected before anything spends money.
-2. **Prompt cache** — keyed by a hash of the full request fingerprint *and* the
+2. **Prompt cache** — keyed by a hash of the full request fingerprint _and_ the
    tenant, so one customer's cache can never serve another's answer, and a change
    to the system prompt invalidates correctly.
 3. **Backend chain** — tried in order, skipping any backend without credentials:
 
-   | Backend          | Role                                             |
-   | ---------------- | ------------------------------------------------ |
-   | `anthropic`      | Primary model                                     |
-   | `openrouter`     | Cheaper second tier                               |
-   | `deterministic`  | Always available, no network, answers from content |
+    | Backend         | Role                                               |
+    | --------------- | -------------------------------------------------- |
+    | `anthropic`     | Primary model                                      |
+    | `openrouter`    | Cheaper second tier                                |
+    | `deterministic` | Always available, no network, answers from content |
 
 4. **Circuit breaker** per backend. After `LLM_BREAKER_THRESHOLD` consecutive
    failures the backend is skipped. Once the cooldown expires, **exactly one**
@@ -372,17 +386,17 @@ npx tsc --noEmit           # typecheck TypeScript
 
 The suite covers the parts where a mistake is expensive:
 
-| Area                | What is asserted                                                     |
-| ------------------- | -------------------------------------------------------------------- |
-| `RetryPolicy`       | retries transient failures, gives up on non-retryable ones, honours `Retry-After`, jitter stays within the ceiling |
-| `CircuitBreaker`    | opens after the threshold, admits one probe while half-open, closes on success |
-| `FallbackChain`     | the chain degrades to a lesser answer instead of erroring            |
-| `PromptCache`       | hit and miss, tenant isolation, system-prompt invalidation            |
-| `Guardrails`        | oversized input, blocked fragments, empty output                     |
-| `LlmGateway`        | ordering of the stages, blocked output, audit rows                   |
-| Tenant resolution   | env fallback, session override, refusal to write without a tenant    |
-| Endpoints           | assistant blocking and streaming, telemetry shape                    |
-| Translations        | no key missing in any registered locale                              |
+| Area              | What is asserted                                                                                                   |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `RetryPolicy`     | retries transient failures, gives up on non-retryable ones, honours `Retry-After`, jitter stays within the ceiling |
+| `CircuitBreaker`  | opens after the threshold, admits one probe while half-open, closes on success                                     |
+| `FallbackChain`   | the chain degrades to a lesser answer instead of erroring                                                          |
+| `PromptCache`     | hit and miss, tenant isolation, system-prompt invalidation                                                         |
+| `Guardrails`      | oversized input, blocked fragments, empty output                                                                   |
+| `LlmGateway`      | ordering of the stages, blocked output, audit rows                                                                 |
+| Tenant resolution | env fallback, session override, refusal to write without a tenant                                                  |
+| Endpoints         | assistant blocking and streaming, telemetry shape                                                                  |
+| Translations      | no key missing in any registered locale                                                                            |
 
 ## Deploying to Vercel
 
@@ -430,13 +444,13 @@ Two settings are easy to get wrong:
 
 This is a stateless application and treats the platform as such:
 
-| Constraint         | Handling                                                                   |
-| ------------------ | -------------------------------------------------------------------------- |
-| No durable disk    | Nothing is written to disk. Uploads would go to object storage.            |
-| Multiple instances | Session and cache use the database store, which is shared.                 |
-| Logs               | `LOG_CHANNEL=stderr`, so they reach the platform's runtime log.            |
-| No long processes  | Queue work is dispatched over HTTP or handled synchronously.              |
-| Cold starts        | Dependencies are installed in the image, not at runtime.                  |
+| Constraint         | Handling                                                        |
+| ------------------ | --------------------------------------------------------------- |
+| No durable disk    | Nothing is written to disk. Uploads would go to object storage. |
+| Multiple instances | Session and cache use the database store, which is shared.      |
+| Logs               | `LOG_CHANNEL=stderr`, so they reach the platform's runtime log. |
+| No long processes  | Queue work is dispatched over HTTP or handled synchronously.    |
+| Cold starts        | Dependencies are installed in the image, not at runtime.        |
 
 ## Project structure
 
@@ -476,19 +490,20 @@ or `npm run dev` while working locally.
 **The assistant returns 422 with a rule name.** An input guardrail rejected the
 prompt. The rule is in the response; `config/llm.php` lists the fragments.
 
-**Every HTML route returns 500 but the API endpoints work.**  is
-probably a  variable, which Vercel injects as the literal string
+**Every HTML route returns 500 but the API endpoints work.** is
+probably a variable, which Vercel injects as the literal string
 . Recreate it as . See the notes section above.
 
 **The assistant answers but nothing is recorded.** Expected: on a platform with
 no durable disk the audit rows and transcripts degrade to log lines rather than
-failing the request. That is the  path working.
+failing the request. That is the path working.
 
 **Cold starts are slow.** The image is doing work that belongs at build time.
-Check that 
-  [37;44m INFO [39;49m Discovering packages.  
+Check that
+[37;44m INFO [39;49m Discovering packages.
 
-  inertiajs/inertia-laravel [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
-  laravel/tinker [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
-  nesbot/carbon [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
-  nunomaduro/termwind [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m ran in the image, not at runtime.
+inertiajs/inertia-laravel [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
+laravel/tinker [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
+nesbot/carbon [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m
+nunomaduro/termwind [90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m[90m.[39m [32;1mDONE[39;22m ran in the image, not at runtime.
+
