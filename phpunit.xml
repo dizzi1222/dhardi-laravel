@@ -23,6 +23,12 @@
         <env name="BCRYPT_ROUNDS" value="4"/>
         <env name="BROADCAST_CONNECTION" value="null"/>
         <env name="CACHE_STORE" value="array"/>
+        <!-- The prompt cache and the circuit breaker read their own store from
+             llm.cache.store, not from the application default. Left at `file`
+             they keep their state on disk between tests and between runs, which
+             turns an assertion about a cache hit into a coin flip. -->
+        <env name="LLM_CACHE_STORE" value="array"/>
+        <env name="LLM_CACHE_ENABLED" value="true"/>
         <env name="DB_CONNECTION" value="sqlite"/>
         <env name="DB_DATABASE" value=":memory:"/>
         <env name="DB_URL" value=""/>
