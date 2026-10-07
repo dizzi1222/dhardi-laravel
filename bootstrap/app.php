@@ -15,6 +15,18 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // The platform terminates TLS and forwards plain HTTP to the container,
+        // so every request arrives with `X-Forwarded-Proto: https` and a
+        // transport that looks like http. Without trusting the proxy, Laravel
+        // believes the connection is insecure and emits every generated URL
+        // with an `http://` scheme — including the Vite asset tags. The
+        // browser then refuses to load them as mixed active content, and the
+        // page renders unstyled with no JavaScript.
+        //
+        // `at: '*'` is the right setting here because the trusted hop is a
+        // platform edge whose address is not fixed and cannot be listed.
+        $middleware->trustProxies(at: '*');
+
         $middleware->web(append: [
             SetLocale::class,
             HandleInertiaRequests::class,
