@@ -1,5 +1,5 @@
 import Section from './Section';
-import { useT } from '../lib/i18n';
+import { useList, useT } from '../lib/i18n';
 import type { CertificationItem, StackProof } from '../types';
 
 /**
@@ -8,6 +8,8 @@ import type { CertificationItem, StackProof } from '../types';
  */
 export function StackProofSection({ items }: { items: StackProof[] }) {
     const t = useT();
+    const readList = useList();
+    const [noticeTitle, noticeBody] = readList('cv.notice.title') as string[];
 
     return (
         <Section
@@ -17,6 +19,16 @@ export function StackProofSection({ items }: { items: StackProof[] }) {
             heading={t('ui.sections.stack.heading')}
             subtitle={t('ui.sections.stack.subtitle')}
         >
+            {/*
+                A visitor who has the CV open and then reaches this page will
+                compare the two lists. Saying plainly where they differ costs
+                less than letting a discrepancy stand and be discovered later.
+            */}
+            <aside className="mb-8 border-l-2 border-signal bg-signal-soft/40 px-4 py-3">
+                <p className="text-sm font-medium text-ink">{noticeTitle}</p>
+                <p className="mt-1 text-sm leading-relaxed text-ink-soft">{noticeBody}</p>
+            </aside>
+
             <ul className="grid gap-5 md:grid-cols-2">
                 {items.map((item) => (
                     <li

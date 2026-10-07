@@ -47,6 +47,9 @@ final class HandleInertiaRequests extends Middleware
                 'hero' => (array) trans('hero'),
                 'fit' => (array) trans('fit'),
                 'meta' => (array) trans('meta'),
+                'cv' => [
+                    'notice' => (array) trans('cv_notice.notice'),
+                ],
                 'profile' => [
                     'summary' => (string) trans('profile.summary'),
                     'languages' => (array) trans('profile.languages'),
