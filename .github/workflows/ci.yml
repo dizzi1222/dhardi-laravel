@@ -37,6 +37,21 @@ jobs:
 
       - run: composer install --no-interaction --no-progress
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci --ignore-scripts
+
+      # Required before the feature tests, not just for the build. The Blade
+      # shell calls @vite, which throws when `public/build/manifest.json` is
+      # missing — so every test that renders a page fails on a checkout that has
+      # not built assets yet, and the failure points at the test rather than at
+      # the missing prerequisite.
+      - name: Build assets for the test run
+        run: npm run build
+
       - name: Environment
         run: cp .env.example .env
 
