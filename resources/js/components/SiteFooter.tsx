@@ -4,14 +4,14 @@ import type { SharedProps } from '../types';
 
 export default function SiteFooter() {
     const t = useT();
-    const { tenant } = usePage<SharedProps>().props;
+    const { tenant, displayName } = usePage<SharedProps>().props;
 
     return (
         <footer className="rule mt-8 py-12">
             <div className="shell grid gap-8 sm:grid-cols-[1fr_auto] sm:items-end">
                 <div className="max-w-2xl">
                     <p className="eyebrow">
-                        {tenant?.name ?? 'Diego Härdi'} · {new Date().getFullYear()}
+                        {tenant?.name ?? displayName} · {new Date().getFullYear()}
                     </p>
                     <p className="mt-3 text-xs leading-relaxed text-ink-mute">
                         {t('ui.sections.footer.built_with')}

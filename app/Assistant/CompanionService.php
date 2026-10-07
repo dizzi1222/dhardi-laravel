@@ -213,6 +213,11 @@ final class CompanionService
 
     /**
      * Assembled from live content rather than transcribed into a prompt file.
+     *
+     * The author's name is injected here rather than written into the lang
+     * file, because this string is sent to a model provider. Keeping the name in
+     * one config value means the public identity can be changed without editing
+     * a prompt in three languages.
      */
     private function systemPrompt(): string
     {
@@ -224,6 +229,7 @@ final class CompanionService
             ->implode("\n");
 
         return (string) trans('assistant.system', [
+            'author' => (string) config('portfolio.public_identity.display_name'),
             'projects' => $projects,
             'stack' => (string) trans('assistant.stack_line'),
             'maxChars' => (int) config('llm.guardrails.max_output_chars'),

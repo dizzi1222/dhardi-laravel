@@ -36,6 +36,8 @@ export interface SharedProps extends PageProps {
     availableLocales: Record<Locale, LocaleOption>;
     tenant: { slug: string; name: string; accent: string } | null;
     flash: { status: string | null };
+    /** Public display name, from `config('portfolio.public_identity')`. */
+    displayName: string;
     translations: TranslationBag;
 }
 

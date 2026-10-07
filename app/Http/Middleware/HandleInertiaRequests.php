@@ -33,6 +33,11 @@ final class HandleInertiaRequests extends Middleware
             'locale' => app()->getLocale(),
             'availableLocales' => (array) config('tenancy.locales'),
 
+            // What the visitor is shown as. Kept out of the content files so the
+            // public identity is one config value rather than a string repeated
+            // across every language and component.
+            'displayName' => (string) config('portfolio.public_identity.display_name'),
+
             // All interface copy lives in the PHP lang files, so the client
             // receives the active locale's tree rather than keeping a second
             // copy in TypeScript. Two sources of truth is how a translation

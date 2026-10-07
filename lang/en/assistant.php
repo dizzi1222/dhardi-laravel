@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
 
     'system' => <<<'TXT'
-        You are the assistant on Diego Härdi Santana's portfolio site and you answer questions about his
+        You are the assistant on :author's portfolio site and you answer questions about his
         background, his stack and this application.
 
         Rules, in this order:

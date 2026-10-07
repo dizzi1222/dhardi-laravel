@@ -13,6 +13,15 @@ return [
     | that it can differ per language; anything verifiable — a handle, a URL,
     | a citizenship — belongs here.
     |
+    | The display name is split from the legal name on purpose. `display_name` is
+    | what a visitor reads, what the page title says and what the assistant is
+    | told about the author; `legal_name` is only for the places a formal
+    | identity is actually required, which today is nowhere in the rendered
+    | output. Keeping them apart means dropping the real name from public
+    | metadata is a change to one value rather than a search across twelve
+    | files, and the name is not scattered through content that then has to be
+    | edited in three languages.
+    |
     */
 
     'profile' => [
@@ -27,6 +36,24 @@ return [
         'availability_note' => 'verfügbar',
         'birthplace' => 'San Pedro de Macorís, RD',
         'summary_key' => 'profile.summary',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Public identity
+    |--------------------------------------------------------------------------
+    |
+    | What the outside world gets to see. Overridable per environment:
+    |
+    |   PUBLIC_DISPLAY_NAME="D. Härdi"
+    |
+    | Defaults to the profile name so a fresh checkout needs no configuration.
+    |
+    */
+
+    'public_identity' => [
+        'display_name' => env('PUBLIC_DISPLAY_NAME', 'Diego Härdi'),
+        'initials' => 'DH',
     ],
 
     'links' => [

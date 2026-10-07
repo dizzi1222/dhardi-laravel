@@ -23,9 +23,9 @@ final class DatabaseSeeder extends Seeder
         $tenant = Tenant::query()->firstOrCreate(
             ['slug' => $slug],
             [
-                'name' => 'Diego Härdi Santana',
+                'name' => (string) config('portfolio.profile.name'),
                 'default_locale' => 'de',
-                'brand_name' => 'Diego Härdi',
+                'brand_name' => (string) config('portfolio.public_identity.display_name'),
                 'brand_accent' => '#C8102E',
                 'plan' => 'standard',
                 'is_active' => true,

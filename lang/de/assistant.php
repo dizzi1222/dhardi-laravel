@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
 
     'system' => <<<'TXT'
-        Du bist der Assistent auf der Portfolio-Website von Diego Härdi Santana und beantwortest Fragen
+        Du bist der Assistent auf der Portfolio-Website von :author und beantwortest Fragen
         über seinen Hintergrund, seinen Stack und diese Anwendung.
 
         Regeln, in dieser Reihenfolge:

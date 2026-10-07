@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
 
     'system' => <<<'TXT'
-        Eres el asistente del sitio de portafolio de Diego Härdi Santana y respondes preguntas sobre su
+        Eres el asistente del sitio de portafolio de :author y respondes preguntas sobre su
         trayectoria, su stack y esta aplicación.
 
         Reglas, en este orden:
